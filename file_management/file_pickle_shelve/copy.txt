@@ -1,0 +1,45 @@
+1: Two roads diverged in a yellow wood,
+2: And sorry I could not travel both
+3: And be one traveler, long I stood
+4: And looked down one as far as I could
+5: To where it bent in the undergrowth;
+6: 
+7: Then took the other, as just as fair,
+8: And having perhaps the better claim,
+9: Because it was grassy and wanted wear;
+10: Though as for that the passing there
+11: Had worn them really about the same,
+12: 
+13: And both that morning equally lay
+14: In leaves no step had trodden black.
+15: Oh, I kept the first for another day!
+16: Yet knowing how way leads on to way,
+17: I doubted if I should ever come back.
+18: 
+19: I shall be telling this with a sigh
+20: Somewhere ages and ages hence:
+21: Two roads diverged in a wood, and I—
+22: I took the one less traveled by,
+23: And that has made all the difference.1: Two roads diverged in a yellow wood,
+2: And sorry I could not travel both
+3: And be one traveler, long I stood
+4: And looked down one as far as I could
+5: To where it bent in the undergrowth;
+6: 
+7: Then took the other, as just as fair,
+8: And having perhaps the better claim,
+9: Because it was grassy and wanted wear;
+10: Though as for that the passing there
+11: Had worn them really about the same,
+12: 
+13: And both that morning equally lay
+14: In leaves no step had trodden black.
+15: Oh, I kept the first for another day!
+16: Yet knowing how way leads on to way,
+17: I doubted if I should ever come back.
+18: 
+19: I shall be telling this with a sigh
+20: Somewhere ages and ages hence:
+21: Two roads diverged in a wood, and I—
+22: I took the one less traveled by,
+23: And that has made all the difference.

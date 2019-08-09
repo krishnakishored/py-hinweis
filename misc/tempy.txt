@@ -1,0 +1,427 @@
+Iterators and Generators
+An iterator is nothing more than a container object that implements the iterator
+protocol. It is based on two methods:
+next, which returns the next item of the container
+__iter__, which returns the iterator itself
+Iterators can be created with a sequence using the iter built-in function,
+for example:
+>>> i = iter('abc')
+>>> i.next()
+'a'
+>>> i.next()
+'b'
+>>> i.next()
+'c'
+>>> i.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+When the sequence is exhausted, a StopIteration exception is raised. It makes
+iterators compatible with loops since they catch this exception to stop cycling. To
+create a custom iterator, a class with a next method can be written, as long as it
+provides the special method __iter__ that returns an instance of the iterator:
+>>> class MyIterator(object):
+...     def __init__(self, step):
+...         self.step = step
+...     def next(self):
+...         """Returns the next element."""
+...         if self.step == 0:
+...             raise StopIteration
+...         self.step -= 1
+...         return self.step
+...     def __iter__(self):
+...         """Returns the iterator itself."""
+...         return self
+...
+>>> for el in MyIterator(4):
+...     print el
+...
+3
+2
+1
+0
+•
+•Chapter 2
+[ 37 ]
+Iterators themselves are a low-level feature and concept, and a program can
+live without them. But they provide the base for a much more interesting
+feature: generators.
+Generators
+Since Python 2.2, generators provide an elegant way to write simple and efficient
+code for functions that return a list of elements. Based on the yield directive, they
+allow you to pause a function and return an intermediate result. The function saves
+its execution context and can be resumed later if necessary.
+For example (this is the example provided in the PEP about iterators), the Fibonacci
+series can be written with an iterator:
+>>> def fibonacci():
+...     a, b = 0, 1
+...     while True:
+...         yield b
+...         a, b = b, a + b
+...
+>>> fib = fibonacci()
+>>> fib.next()
+1
+>>> fib.next()
+1
+>>> fib.next()
+2
+>>> [fib.next() for i in range(10)]
+[3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
+This function returns a generator object, a special iterator, which knows how to
+save the execution context. It can be called indefinitely, yielding the next element of
+the suite each time. The syntax is concise, and the infinite nature of the algorithm
+does not disturb the readability of the code anymore. It does not have to provide a
+way to make the function stoppable. In fact, it looks similar to how the series would
+be designed in pseudo-code.
+A PEP is a Python Enhancement Proposal. It is a paper written to make a
+change on Python, and a start-point for the community to discuss it.
+See PEP 1 for further information: http://www.python.org/dev/
+peps/pep-0001Syntax Best Practices—Below the Class Level
+[ 38 ]
+In the community, generators are not used so often because the developers are not
+used to thinking this way. The developers have been used to working with straight
+functions for years. generators should be considered every time you deal with a
+function that returns a sequence or works in a loop. Returning the elements one at a
+time can improve the overall performance, when they are passed to another function
+for further work.
+In that case, the resources used to work out one element are most of the time less
+important than the resources used for the whole process. Therefore, they can be
+kept low, making the program more efficient. For instance, the Fibonacci sequence
+is infinite, and yet the generator that generates it does not require an infinite amount
+of memory to provide the values one at a time. A common use case is to stream data
+buffers with generators. They can be paused, resumed, and stopped by third-party
+code that plays over the data, and all the data need not be loaded before starting
+the process.
+The tokenize module from the standard library, for instance, generates tokens out
+of a stream of text and returns an iterator for each treated line, that can be passed
+along to some processing:
+>>> import tokenize
+>>> reader = open('amina.py').next
+>>> tokens = tokenize.generate_tokens(reader)
+>>> tokens.next()
+(1, 'from', (1, 0), (1, 4), 'from amina.quality import
+                                                    similarities\n')
+>>> tokens.next()
+(1, 'amina', (1, 5), (1, 10), 'from amina.quality import
+                                                    similarities\n')
+>>> tokens.next()
+Here we see that open iterates over the lines of the file and generate_tokens iterates
+over them in a pipeline, doing additional work.
+generators can also help in breaking the complexity, and raising the efficiency of
+some data transformation algorithms that are based on several suites. Thinking of
+each suite as an iterator, and then combining them into a high-level function is a
+great way to avoid a big, ugly, and unreadable function. Moreover, this can provide
+a live feedback to the whole processing chain.
+In the example below, each function defines a transformation over a sequence. They
+are then chained and applied. Each call processes one element and returns its result:
+>>> def power(values):
+...     for value in values:
+...         print 'powering %s' % value
+...         yield valueChapter 2
+[ 39 ]
+...
+>>> def adder(values):
+...     for value in values:
+...         print 'adding to %s' % value
+...         if value % 2 == 0:
+...             yield value + 3
+...         else:
+...             yield value + 2
+...
+>>> elements = [1, 4, 7, 9, 12, 19]
+>>> res = adder(power(elements))
+>>> res.next()
+powering 1
+adding to 1
+3
+>>> res.next()
+powering 4
+adding to 4
+7
+>>> res.next()
+powering 7
+adding to 7
+9
+Keep the code simple, not the data:
+It is better to have a lot of simple iterable functions that work over
+sequences of values than a complex function that computes the result for
+one value at a time.
+The last feature introduced in Python regarding generators is the ability to interact
+with the code called with the next method. yield becomes an expression, and a
+value can be passed along with a new method called send:
+>>> def psychologist():
+...     print 'Please tell me your problems'
+...     while True:
+...         answer = (yield)
+...         if answer is not None:
+...             if answer.endswith('?'):
+...                 print ("Don't ask yourself
+...                        "too much questions")
+...             elif 'good' in answer:
+...                 print "A that's good, go on"
+...             elif 'bad' in answer:
+...                 print "Don't be so negative"
+...
+>>> free = psychologist()Syntax Best Practices—Below the Class Level
+[ 40 ]
+>>> free.next()
+Please tell me your problems
+>>> free.send('I feel bad')
+Don't be so negative
+>>> free.send("Why I shouldn't ?")
+Don't ask yourself too much questions
+>>> free.send("ok then i should find what is good for me")
+A that's good, go on
+send acts like next, but makes yield return the value passed. The function can,
+therefore, change its behavior depending on the client code. Two other functions
+were added to complete this behavior: throw and close. They raise an error into
+the generator:
+throw allows the client code to send any kind of exception to be raised.
+close acts in the same way, but raises a specific exception: GeneratorExit.
+In that case, the generator function must raise GeneratorExit again, or
+StopIteration.
+Therefore, a typical template for a generator would look like the following:
+>>> def my_generator():
+...     try:
+...         yield 'something'
+...     except ValueError:
+...         yield 'dealing with the exception'
+...     finally:
+...         print "ok let's clean"
+...
+>>> gen = my_generator()
+>>> gen.next()
+'something'
+>>> gen.throw(ValueError('mean mean mean'))
+'dealing with the exception'
+>>> gen.close()
+ok let's clean
+>>> gen.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+•
+•Chapter 2
+[ 41 ]
+The finally section, which was not allowed on previous versions, will catch any
+close call or throw call that is not caught, and is the recommended way to do
+some cleanup. The GeneratorExit exception must not be caught in the generator
+because it is used by the compiler to make sure it exits cleanly, when close is called.
+If some code is associated with this exception, the interpreter will raise a system
+error and quit.
+These three new methods make it possible to use generators to write coroutines.
+Coroutines
+A coroutine is a function that can be suspended and resumed, and can have
+multiple entry points. Some languages provide this feature natively such as
+Io (http://iolanguage.com) or Lua (http://www.lua.org). They allow the
+implementation of cooperative multitasking and pipelines. For example, each
+coroutine consumes or produces data, then pauses until other data are passed along.
+Threading is an alternative to coroutines in Python. It can be used to run an
+interaction between pieces of code. But they need to take care of resource locking
+since they behave in a pre-emptive manner, whereas coroutines don't. Such code
+can become fairly complex to create and debug. Though generators are almost
+coroutines, the addition of send, throw, and close was originally meant to provide
+a coroutine-like feature to the language.
+PEP 342 (http://www.python.org/dev/peps/pep-0342) that initiated the new
+behavior of generators also provides a full example on how to create a coroutine
+scheduler. The pattern is called Trampoline, and can be seen as a mediator between
+coroutines that produce and consume data. It works with a queue where coroutines
+are wired together.
+The multitask module available at PyPI (install it with easy_install multitask)
+implements this pattern and can be used straightforwardly:
+>>> import multitask
+>>> import time
+>>> def coroutine_1():
+...     for i in range(3):
+...         print 'c1'
+...         yield i
+...
+>>> def coroutine_2():
+...     for i in range(3):
+...         print 'c2'
+...         yield i
+...
+>>> multitask.add(coroutine_1())
+>>> multitask.add(coroutine_2())Syntax Best Practices—Below the Class Level
+[ 42 ]
+>>> multitask.run()
+c1
+c2
+c1
+c2
+c1
+c2
+A classical example of cooperative work between coroutines is a server application
+that receives queries from multiple clients, and delegates each one to a new thread
+that responds to it. Implementing this pattern with coroutines is a matter of writing
+a coroutine (server) that is in charge of receiving queries, and another one (handler)
+for treating them. The first coroutine places a new handler call for each request in
+the trampoline.
+The multitask package adds good APIs to play with sockets, and an echo server, for
+example, is done straightforward with it:
+from __future__ import with_statement
+from contextlib import closing
+import socket
+import multitask
+def client_handler(sock):
+    with closing(sock):
+        while True:
+            data = (yield multitask.recv(sock, 1024))
+            if not data:
+                break
+            yield multitask.send(sock, data)
+def echo_server(hostname, port):
+    addrinfo = socket.getaddrinfo(hostname, port,
+                                      socket.AF_UNSPEC,
+                                  socket.SOCK_STREAM)
+    (family, socktype, proto,
+     canonname, sockaddr) = addrinfo[0]
+    with closing(socket.socket(family,
+                               socktype,
+                               proto)) as sock:
+        sock.setsockopt(socket.SOL_SOCKET,
+                        socket.SO_REUSEADDR, 1)
+        sock.bind(sockaddr)
+        sock.listen(5)
+        while True:
+            multitask.add(client_handler((
+                     yield multitask.accept(sock))[0]))Chapter 2
+[ 43 ]
+if __name__ == '__main__':
+    import sys
+    hostname = None
+    port = 1111
+    if len(sys.argv) > 1:
+        hostname = sys.argv[1]
+    if len(sys.argv) > 2:
+        port = int(sys.argv[2])
+    multitask.add(echo_server(hostname, port))
+    try:
+        multitask.run()
+    except KeyboardInterrupt:
+        pass
+contextlib is discussed a bit later in this chapter.
+Another coroutine implementation:
+greenlet (http://codespeak.net/py/dist/greenlet.html) is
+another library that provides a good implementation of coroutines for
+Python, among other features.
+Generator Expressions
+Python provides a shortcut to write simple generators over a sequence. A syntax
+similar to list comprehensions can be used to replace yield. Parentheses are used
+instead of brackets:
+>>> iter = (x**2 for x in range(10) if x % 2 == 0)
+>>> for el in iter:
+...     print el
+...
+0
+4
+16
+36
+64
+These kinds of expressions are called generator expressions or genexp. They are
+used in the way the list comprehensions are used to reduce the size of a sequence
+of code. They also yield elements one at a time like regular generators do. So the
+whole sequence is not computed ahead of time as list comprehensions. They should
+be used every time a simple loop is made on a yield expression, or to replace a list
+comprehension that can behave as an iterator.Syntax Best Practices—Below the Class Level
+[ 44 ]
+The itertools Module
+When iterators were added in Python, a new module was provided to implement
+common patterns. Since it is written in the C language, it provides the most efficient
+iterators. itertools covers many patterns, but the most interesting ones are islice,
+tee, and groupby.
+islice: The Window Iterator
+islice returns an iterator that works over a subgroup of a sequence. The following
+example reads the lines in a standard input, and yields the elements of each line
+starting from the fifth one, as long as the line has more than four elements:
+>>> import itertools
+>>> def starting_at_five():
+...     value = raw_input().strip()
+...     while value != '':
+...         for el in itertools.islice(value.split(),
+...                                    4, None):
+...             yield el
+...         value = raw_input().strip()
+...
+>>> iter = starting_at_five()
+>>> iter.next()
+one two three four five six
+'five'
+>>> iter.next()
+'six'
+>>> iter.next()
+one two
+one two three four five six
+'five'
+>>> iter.next()
+'six'
+>>> iter.next()
+one
+one two three four five six seven eight
+'five'
+>>> iter.next()
+'six'
+>>> iter.next()
+'seven'
+>>> iter.next()
+'eight'Chapter 2
+[ 45 ]
+One can use islice every time to extract data located in a particular position in a
+stream. This can be a file in a special format using records for instance, or a stream
+that presents data encapsulated with metadata, like a SOAP envelope, for example.
+In that case, islice can be seen as a window that slides over each line of data.
+tee: The Back and Forth Iterator
+An iterator consumes the sequence it works with. There is no turning back. tee
+provides a pattern to run several iterators over a sequence. This helps us to run over
+the data again, if provided with the information of the first run. For instance, reading
+the header of a file can provide information on its nature before running a process
+over it:
+>>> import itertools
+>>> def with_head(iterable, headsize=1):
+...     a, b = itertools.tee(iterable)
+...     return list(itertools.islice(a, headsize)), b
+...
+>>> with_head(seq)
+([1], <itertools.tee object at 0x100c698>)
+>>> with_head(seq, 4)
+([1, 2, 3, 4], <itertools.tee object at 0x100c670>)
+In this function, if two iterators are generated with tee, then the first one is used
+with islice to get the first headsize elements of the iteration, and return them as
+a flat list. The second element returned is a fresh iterator that can be used to perform
+work over the whole sequence.
+groupby: The uniq Iterator
+This function works a little like the Unix command uniq. It is able to group the
+duplicate elements from an iterator, as long as they are adjacent. A function can
+be given to the function for it to compare the elements. Otherwise, the identity
+comparison is used.
+An example use case for groupby is compressing data with run-length encoding
+(RLE). Each group of adjacent repeated characters of a string is replaced by the
+character itself and the number of occurrences. When the character is alone, 1 is used.
+For example:
+get uuuuuuuuuuuuuuuuuup
+will be replaced by:
+1g1e1t1 8u1pSyntax Best Practices—Below the Class Level
+[ 46 ]
+Just a few lines are necessary with groupby to obtain RLE:
+>>> from itertools import groupby
+>>> def compress(data):
+...     return ((len(list(group)), name)
+...             for name, group in groupby(data))
+...
+>>> def decompress(data):
+...     return (car * size for size, car in data)
+...
+>>> list(compress('get uuuuuuuuuuuuuuuuuup'))
+[(1, 'g'), (1, 'e'), (1, 't'), (1, ' '),
+ (18, 'u'), (1, 'p')]
+>>> compressed = compress('get uuuuuuuuuuuuuuuuuup')
+>>> ''.join(decompress(compressed))
+'get uuuuuuuuuuuuuuuuuup'
+Compression algorithms:
+If you are interested in compression, consider the LZ77 algorithm. It is an
+enhanced version of RLE that looks for adjacent matching patterns instead
+of matching characters: http://en.wikipedia.org/wiki/LZ77.
+groupby can be used each time a summary has to be done over data. In this matter,
+the built-in function sorted is very useful to make the similar elements adjacent
+from data passed to it.
