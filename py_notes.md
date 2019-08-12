@@ -39,11 +39,11 @@
 22) @property
 23) recursive functions 
 24) Memoization 
-      * https://www.python-course.eu/python3_memoization.php
+      
       > Memoisation is a technique used in computing to speed up programs. This is accomplished by memorizing the calculation results of processed input such as the results of function calls.French Jesuit Claude-Gaspar Bachet phrased it.
 
 25) logging module
-      * https://pymotw.com/3/logging/index.html#module-logging
+      
 
 Python string questions:-
 --------------------------
@@ -61,7 +61,7 @@ python iterators related questions:-
 -------------------------------------
 1) What are iterators in Python?
 2) What are generators in Python? and yield keyword use in python ??
-      https://python-course.eu/python3_generators.php
+      
 
       > An iterator can be seen as a pointer to a container, e.g. a list structure that can iterate over all the elements of this container. The iterator is an abstraction, which enables the programmer to access all the elements of a container (a set, a list and so on) without any deeper knowledge of the data structure of this container object.
 
@@ -86,7 +86,6 @@ python iterators related questions:-
 
 
 3) list comprehensions in python ??
-   * https://www.digitalocean.com/community/tutorials/understanding-list-comprehensions-in-python-3
    > List comprehension is an elegant way to define and create list in Python
      list_variable = [x for x in iterable]
     
@@ -100,9 +99,8 @@ python iterators related questions:-
 
 8) What is the difference between Xrange and range?
 9) Difference between iterable and iterator
-     https://stackoverflow.com/questions/9884132/what-exactly-are-iterator-iterable-and-iteration
-     https://python-course.eu/python3_iterable_iterator.php
 
+     
     > In Python, iterable and iterator have specific meanings.
     An iterable is an object that has an __iter__ method which returns an iterator, or which defines a __getitem__ method that can take sequential indexes starting from zero (and raises an IndexError when the indexes are no longer valid). So an iterable is an object that you can get an iterator from.
     - Iterables can return their elements one at time.
@@ -126,7 +124,7 @@ python iterators related questions:-
       > A set comprehension is similar to a list comprehension, but returns a set and not a list. Syntactically, we use curly brackets instead of square brackets to create a set.
 
 11) what are itertools?
-      > https://realpython.com/python-itertools/
+      
 
 Python mechanism related questions:-
 ------------------------------------
@@ -153,7 +151,7 @@ Python mechanism related questions:-
             
 4) What is Pickling and how does it different from Unpickling?
 5) Decorators used for Polynomial functions in Python
-      * https://www.python-course.eu/polynomial_class_in_python.php
+      
 6) Callable objects of Python
       > A callable object is an object which can be used and behaves like a function but might not be a function. It is possible to define classes in a way that the instances will be callable objects. The __call__ method is called, if the instance is called "like a function", 
 7)  write a fibonacci class using __call__
@@ -181,7 +179,7 @@ Collections(list,tuple,set,dictionary):-
 1) When to use list ?? tuple ?? set ?? and dictionary in python ??
 2) List out the each collections(list,tuple,set and dictinary)object type. i.e
    List which are mutable objects and which are immutable objects ??
-   * https://www.programiz.com/python-programming/list
+   
 
 3) How will you remove the duplicate elements from the given list?
 4) What is the best approach to store a list of an employee’s first and last names?
@@ -213,8 +211,7 @@ Collections(list,tuple,set,dictionary):-
 20) How do you implement constant variables in python ???
 21) Exact use of Abstract class??
 22) Is there object slicing in Python
-23) Magic Methods and Operator Overloading
-      * https://www.python-course.eu/python3_magic_methods.php     
+23) Magic Methods and Operator Overloading     
 24) Attributes vs Properties in a python class
     - properties and attributes are essentially different things in Python.
     - Attributes are created inside of a class. Also we can dynamically create arbitary new attributes for existing classes
@@ -286,7 +283,7 @@ Concurrency :-
 10) Explain about wait(),notify() and notifyALL() methods ??
       (Inter process communication methods)
       (Thread condition mechanism)
-      * https://pymotw.com/3/threading/#thread-objects
+      
       
 11) Why wait(), notify() and notifyAll() methods have to be called from
       synchronized method or block?
@@ -567,9 +564,24 @@ interview questions - bogotobogo
 142. Sum of strings
 143. List rotation - left/right
 144. shallow/deep copy
+      - A shallow copy means constructing a new collection object and then populating it with references to the child objects found in the original. In essence, a shallow copy is only one level deep. The copying process does not recurse and therefore won’t create copies of the child objects themselves.
+
+      - A deep copy makes the copying process recursive. It means first constructing a new collection object and then recursively populating it with copies of the child objects found in the original. Copying an object this way walks the whole object tree to create a fully independent clone of the original object and all of its children
+
 145. Converting integer to binary number
 146. Creating a directory and a file
 147. Creating a file if not exists
 148. Invoking a python file from another
 
 
+## References
+1. https://stackoverflow.com/questions/9884132/what-exactly-are-iterator-iterable-and-iteration
+1. https://www.python-course.eu/python3_memoization.php
+1. logging -  https://pymotw.com/3/logging/index.html#module-logging
+1. itertools -  https://realpython.com/python-itertools/
+1. magic-methods - https://www.python-course.eu/python3_magic_methods.php
+1. Threads -  https://pymotw.com/3/threading/#thread-objects
+1. Decorators - Iterators - Generators
+      * https://www.python-course.eu/polynomial_class_in_python.php
+      * https://python-course.eu/python3_generators.php
+      * https://python-course.eu/python3_iterable_iterator.php
