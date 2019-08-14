@@ -17,15 +17,22 @@
 15) How will you share global variables across modules?
 16) What are the tools that help to find bugs or perform static analysis?
 17) As Everything in Python is an Object, Explain the characteristics of Python's Objects.
-18) Diff between __repr__ and ___str___ methods
-      If you apply str or repr to an object, Python is looking for a corresponding method __str__ or __repr__ in the class definition of the object. If the method does exist, it will be called. 
-    
+18. Diff between __repr__ and ___str___ methods
+   If you apply str or repr to an object, Python is looking for a corresponding method __str__ or __repr__ in the class definition of the object.
     __str__ is always the right choice, if the output should be for the end user or in other words, if it should be nicely printed. 
     __repr__ on the other hand is used for the internal representation of an object. The output of __repr__ should be - if feasible - a string which can be parsed by the python interpreter. The result of this parsing is in an equal object. 
     This means that the following should be true for an object "o": 
       o == eval(repr(o)) 
 
+    * The __str__() and __repr__() methods deal with how objects are presented as strings, 
+      so you’ll need to make sure you include at least one of those methods in your class definition. 
+      If you have to pick one, go with __repr__() because it can be used in place of __str__().
 
+    * The string returned by __str__() is the informal string representation of an object and should be readable. 
+      The string returned by __repr__() is the official representation and should be unambiguous. 
+      Calling str() and repr() is preferable to using __str__() and __repr__() directly.
+
+    * By default, `f-strings` will use __str__(), but you can make sure they use __repr__() if you include the conversion flag `!r`
 
 
 19) Are there equivalents to pointers & references in C/C++
