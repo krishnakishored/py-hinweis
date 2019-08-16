@@ -82,8 +82,41 @@ def set_basics_2():
     print(x.issuperset(z)) # True
 
 
+# https://www.hackerrank.com/challenges/py-introduction-to-sets/problem
+
+def average(array):
+    # your code goes here
+    array_set = set(array)
+    # return array_set/len(array_set)
+    result = 0
+    for elem in array_set:
+        result+=elem
+    return result/len(array_set)
 
 
-if __name__ == "__main__":
-    # set_basics_1()
-    set_basics_2()
+
+# https://www.hackerrank.com/challenges/no-idea/problem    
+
+def no_idea():
+    n,m = map(int,input().split())
+    arr = map(int,input().split())
+    setA = set(map(int,input().split()))
+    setB = set(map(int,input().split()))
+    
+    # arr = [1,3,5]
+    # setA = set([3,1])
+    # setB = set([5,7])
+    countA = countB = 0
+    for elem in arr:
+        if elem in setA:
+            countA+=1
+        elif elem in setB:
+            countB+=1
+    print(countA-countB)
+
+
+if __name__ == '__main__':
+    set_basics_1()
+    # set_basics_2()
+
+

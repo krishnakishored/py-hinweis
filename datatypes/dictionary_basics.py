@@ -174,6 +174,9 @@ def find_average_percentage():
     # print("{0:.2f}".format(sum(query_scores)/(len(query_scores))))
     print(f'{sum(query_scores)/len(query_scores):.2f}')
 
+    # Converting Between Strings and Lists
+
+
 if __name__ == "__main__":
     # dict_basics_1()
     # dict_basics_2()

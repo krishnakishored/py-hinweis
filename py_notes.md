@@ -111,6 +111,7 @@ python iterators related questions:-
     > In Python, iterable and iterator have specific meanings.
     An iterable is an object that has an __iter__ method which returns an iterator, or which defines a __getitem__ method that can take sequential indexes starting from zero (and raises an IndexError when the indexes are no longer valid). So an iterable is an object that you can get an iterator from.
     - Iterables can return their elements one at time.
+      Iterables: the general Python term for a sequential collection of objects. 
     - Technically, any Python object that implements the .__iter__() or .__getitem__() methods is iterable.
     - The iter() built-in function, when called on an iterable, returns an iterator object for that iterable:
 
