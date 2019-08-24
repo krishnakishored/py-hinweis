@@ -97,23 +97,23 @@ python iterators related questions:-
      list_variable = [x for x in iterable]
     
 4) zip function in python ??
+> zip() which takes any number of iterables as arguments and returns an iterator over tuples of their corresponding elements
+
 5) What is the use of enumerate() in Python?
 6) lamda expressions in python ???
 7) Map,reduce and filter functions in python ???
-
-      s> The map() built-in function is another “iterator operator” that, in its simplest form, applies a single-parameter function to each element of an iterable one element at a time:
+   * The `map()` built-in function is another “iterator operator” that, in its simplest form, applies a single-parameter function to each element of an iterable one element at a time:
 
 
 8) What is the difference between Xrange and range?
 9) Difference between iterable and iterator
-
-     
-    > In Python, iterable and iterator have specific meanings.
-    An iterable is an object that has an __iter__ method which returns an iterator, or which defines a __getitem__ method that can take sequential indexes starting from zero (and raises an IndexError when the indexes are no longer valid). So an iterable is an object that you can get an iterator from.
+   * In Python, iterable and iterator have specific meanings.
+    An `iterable` is an object that has an __iter__ method which returns an iterator, or which defines a __getitem__ method that can take sequential indexes starting from zero (and raises an IndexError when the indexes are no longer valid). 
+    So an iterable is an object that you can get an iterator from.
     - Iterables can return their elements one at time.
       Iterables: the general Python term for a sequential collection of objects. 
     - Technically, any Python object that implements the .__iter__() or .__getitem__() methods is iterable.
-    - The iter() built-in function, when called on an iterable, returns an iterator object for that iterable:
+    - The `iter()` built-in function, when called on an iterable, returns an `iterator` object for that iterable:
 
     > An iterator is an object with a next (Python 2) or __next__ (Python 3) method.
     Whenever you use a for loop, or map, or a list comprehension, etc. in Python, the next method is called automatically to get each item from the iterator, thus going through the process of iteration.
@@ -131,7 +131,9 @@ python iterators related questions:-
 10) Set comprehension
       > A set comprehension is similar to a list comprehension, but returns a set and not a list. Syntactically, we use curly brackets instead of square brackets to create a set.
 
-11) what are itertools?
+11) What are itertools?
+* itertools is best viewed as a collection of building blocks that can be combined to form specialized “data pipelines” 
+* There are two main reasons why such an “iterator algebra” is useful: improved memory efficiency (via lazy evaluation) and faster execuction time. 
       
 
 Python mechanism related questions:-
