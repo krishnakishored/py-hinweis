@@ -398,6 +398,64 @@ Numpy & Pandas
 
 
 
+PySpark
+--------------
+1. At its core, Spark is a generic engine for processing large amounts of data. Spark is written in Scala and runs on the JVM. 
+   Spark has built-in components for processing streaming data, machine learning, graph processing, and even interacting with data via SQL.
+
+1. In a Python context, think of PySpark has a way to handle parallel processing without the need for the threading or multiprocessing modules. 
+   All of the complicated communication and synchronization between threads, processes, and even different CPUs is handled by Spark.
+   - Components of spark 
+      - Spark Core
+      - Spark streaming - for real time data streams
+      - Spark SQL
+      - MLLib
+      - Graphx
+
+  - Spark Context
+      - created by driver program
+      - responsible for making RDD's resilient & distributed
+      - Create RDD's
+      - Spark shell creates a "sc" object for you
+
+
+1. To interact with PySpark, you create specialized data structures called Resilient Distributed Datasets (RDDs). 
+   RDDs hide all the complexity of transforming and distributing your data automatically across multiple nodes by a scheduler if you’re running on a cluster.
+
+1. You can create RDDs in a number of ways, - `parallelize()`, `textFile()`, ... 
+      - The PySpark `parallelize()` function can transform some Python data structures like lists and tuples into RDDs, which gives you functionality that makes them fault-tolerant and distributed. `parallelize()` turns that iterator into a distributed set of numbers and gives you all the capability of Spark’s infrastructure.
+
+1. One of the key distinctions between RDDs and other data structures is that processing is delayed until the result is requested. 
+   This is _similar to a Python generator_. 
+   `lazy evaluation` - Nothing acually happens in your driver program until an action is called.    
+
+1. You can stack up multiple transformations on the same RDD without any processing happening. 
+   This functionality is possible because Spark maintains a `directed acyclic graph` of the transformations.  The underlying graph is only activated when the final results are requested.
+    - Transform RDD - map, flatmap, filter, distinct, sample, union,intersection, subtract, cartesian
+    - Many RDD methods accept a function as a parameter
+    - RDD actions - collect, count, countByValue, take, top, reduce .. 
+
+
+1. There are multiple ways to request the results from an RDD: 
+    - You can explicitly request results to be evaluated and collected to a single cluster node by using `collect()` on a RDD. 
+    - You can also implicitly request the results in various ways, one of which was using `count()` as you saw earlier.
+    - `take()` is a way to see the contents of your RDD, but only a small subset. take() pulls that subset of data from the distributed system onto a single machine.
+
+1. You can use the `spark-submit` command installed along with Spark to submit PySpark code to a cluster using the command line. This command takes a PySpark or Scala program and executes it on a cluster. 
+
+1. PySpark Shell - `$ /usr/local/spark/bin/pyspark`
+    - You didn’t have to create a SparkContext variable in the Pyspark shell example. The PySpark shell automatically creates a variable, sc, to connect you to the Spark engine in single-node mode.
+    - You must create your own SparkContext when submitting real PySpark programs with spark-submit or a Jupyter notebook.
+
+1. HDFS - Hadoop Distributed File System
+
+
+
+1. docker image - jupyter/pyspark-notebook 
+    - ` $ docker run -it -p 8888:8888 --name pyspark-notebook jupyter/pyspark-notebook `
+    - ` $ docker exec -it pyspark-notebook bash `
+
+
 
 
 Bokeh
@@ -586,12 +644,22 @@ interview questions - bogotobogo
 
 ## References
 1. https://stackoverflow.com/questions/9884132/what-exactly-are-iterator-iterable-and-iteration
+
 1. https://www.python-course.eu/python3_memoization.php
+
 1. logging -  https://pymotw.com/3/logging/index.html#module-logging
+
 1. itertools -  https://realpython.com/python-itertools/
+
 1. magic-methods - https://www.python-course.eu/python3_magic_methods.php
+
 1. Threads -  https://pymotw.com/3/threading/#thread-objects
+
 1. Decorators - Iterators - Generators
-      * https://www.python-course.eu/polynomial_class_in_python.php
-      * https://python-course.eu/python3_generators.php
-      * https://python-course.eu/python3_iterable_iterator.php
+      1. https://www.python-course.eu/polynomial_class_in_python.php
+      1. https://python-course.eu/python3_generators.php
+      1. https://python-course.eu/python3_iterable_iterator.php
+
+1. PySpark
+      1. https://realpython.com/pyspark-intro/
+      1. https://levelup.gitconnected.com/using-docker-and-pyspark-134cd4cab867
