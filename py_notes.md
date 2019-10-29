@@ -1,23 +1,24 @@
 ```Python general questions```
 ------------------------------
-1) what is the difference between python and other laungages ??
-2) Mention few benefits of using Python?
-3) Does Python allow arguments Pass by Value or Pass by Reference?
-4) Why is the “pass” keyword used for in Python?
-5) Why is <__init__.py> module used for?
-6) Differentiate between .py and .pyc files?
-7) Explain how Python does Compile-time and Run-time code checking?
-8) How memory is managed in Python?
-9) what is the use of setup.py in python
-10) what is the use of __init__==__main__: condition in python??
-11) what is the type of *args and **kargs ??
-12) difference between %s and %r in python
-13) What is module and package in Python?
-14) How will you set a global variable inside a function?
-15) How will you share global variables across modules?
-16) What are the tools that help to find bugs or perform static analysis?
-17) As Everything in Python is an Object, Explain the characteristics of Python's Objects.
-18. Diff between __repr__ and ___str___ methods
+1. what is the difference between python and other laungages ??
+1. Mention few benefits of using Python?
+1. Does Python allow arguments Pass by Value or Pass by Reference?
+1. Why is the “pass” keyword used for in Python?
+1. Why is <__init__.py> module used for?
+1. Differentiate between .py and .pyc files?
+1. Explain how Python does Compile-time and Run-time code checking?
+1. How memory is managed in Python?
+1. what is the use of setup.py in python
+1. what is the use of __init__==__main__: condition in python??
+1. *args and **kwargs
+      - In Python, a function can be made to accept any arguments with the *args and **kwargs special arguments, which represent positional and keyword arguments respectively.
+1. difference between %s and %r in python
+1. What is module and package in Python?
+1. How will you set a global variable inside a function?
+1. How will you share global variables across modules?
+1. What are the tools that help to find bugs or perform static analysis?
+1. As Everything in Python is an Object, Explain the characteristics of Python's Objects.
+1. Diff between __repr__ and ___str___ methods
    If you apply str or repr to an object, Python is looking for a corresponding method __str__ or __repr__ in the class definition of the object.
     __str__ is always the right choice, if the output should be for the end user or in other words, if it should be nicely printed. 
     __repr__ on the other hand is used for the internal representation of an object. The output of __repr__ should be - if feasible - a string which can be parsed by the python interpreter. The result of this parsing is in an equal object. 
@@ -35,41 +36,38 @@
     * By default, `f-strings` will use __str__(), but you can make sure they use __repr__() if you include the conversion flag `!r`
 
 
-19) Are there equivalents to pointers & references in C/C++
-20) How do create an executable with .py files
-21) use of __name__=="__main__"
+1. Are there equivalents to pointers & references in C/C++
+1. How do create an executable with .py files
+1. use of __name__=="__main__"
 
       Every module in python has a special attribute called __name__ . 
       The value of __name__  attribute is set to '__main__'  when module run as main program. 
       Otherwise the value of __name__  is set to contain the name of the module.
 
-22) @property
-23) recursive functions 
-24) Memoization 
-      
+1. @property
+1. recursive functions 
+1. Memoization 
       > Memoisation is a technique used in computing to speed up programs. This is accomplished by memorizing the calculation results of processed input such as the results of function calls.French Jesuit Claude-Gaspar Bachet phrased it.
 
-25) logging module
+1. logging module
       
 
 Python string questions:-
 --------------------------
-1) What is slicing in Python? Explain with example.
-2) What is a negative index in Python?
-3) What is the best way to split a string in Python?
-4) What is the right way to transform a Python string into a list?
-5) How will you convert a string to a number in Python?
-
+1. What is slicing in Python? Explain with example.
+1. What is a negative index in Python?
+1. What is the best way to split a string in Python?
+1. What is the right way to transform a Python string into a list?
+1. How will you convert a string to a number in Python?
 
 Python library functions
 --------------------------
 
+
 python iterators related questions:-
 -------------------------------------
-1) What are iterators in Python?
-2) What are generators in Python? and yield keyword use in python ??
-      
-
+1. What are iterators in Python?
+1. What are generators in Python? and yield keyword use in python ??
       > An iterator can be seen as a pointer to a container, e.g. a list structure that can iterate over all the elements of this container. The iterator is an abstraction, which enables the programmer to access all the elements of a container (a set, a list and so on) without any deeper knowledge of the data structure of this container object.
 
       > Generators are a special kind of function, which enable us to implement or generate iterators. Iterators are a fundamental concept of Python. 
@@ -92,21 +90,21 @@ python iterators related questions:-
 
 
 
-3) list comprehensions in python ??
+1. list comprehensions in python ??
    > List comprehension is an elegant way to define and create list in Python
      list_variable = [x for x in iterable]
     
-4) zip function in python ??
+1. zip function in python ??
 > zip() which takes any number of iterables as arguments and returns an iterator over tuples of their corresponding elements
 
-5) What is the use of enumerate() in Python?
-6) lamda expressions in python ???
-7) Map,reduce and filter functions in python ???
+1. What is the use of enumerate() in Python?
+1. lamda expressions in python ???
+1. Map,reduce and filter functions in python ???
    * The `map()` built-in function is another “iterator operator” that, in its simplest form, applies a single-parameter function to each element of an iterable one element at a time:
 
 
-8) What is the difference between Xrange and range?
-9) Difference between iterable and iterator
+1. What is the difference between Xrange and range?
+1. Difference between iterable and iterator
    * In Python, iterable and iterator have specific meanings.
     An `iterable` is an object that has an __iter__ method which returns an iterator, or which defines a __getitem__ method that can take sequential indexes starting from zero (and raises an IndexError when the indexes are no longer valid). 
     So an iterable is an object that you can get an iterator from.
@@ -128,72 +126,84 @@ python iterators related questions:-
     - a container object's __iter__() method can be implemented as a generator?
     - an iterable plus a __next__ method is not necessarily an iterator?
     
-10) Set comprehension
+1. Set comprehension
       > A set comprehension is similar to a list comprehension, but returns a set and not a list. Syntactically, we use curly brackets instead of square brackets to create a set.
 
-11) What are itertools?
+1. What are itertools?
 * itertools is best viewed as a collection of building blocks that can be combined to form specialized “data pipelines” 
 * There are two main reasons why such an “iterator algebra” is useful: improved memory efficiency (via lazy evaluation) and faster execuction time. 
       
 
 Python mechanism related questions:-
 ------------------------------------
-1) Explain the use of with statement?  (python context manager mechanism)
+1. Explain the use of with statement?  (python context manager mechanism)
       > Locks implement the context manager API and are compatible with the with statement. Using with removes the need to explicitly acquire and release the lock.
 
       
-2) Whenever Python exists Why does all the memory is not de-allocated / freed
-   (python garbage collector mechanism when Python exits?)
-3) Explain about Python decorators?
-
-      > A decorator in Python is any callable Python object that is used to modify a function or a class. Decorator is simply a callable object that takes a function as an input parameter
-      > Decorators can take arguments. We redefine our decorator.The outermost function takes the arguments,the next more inner function takes the function and the innermost function will be returned and will replace the original function
-      > We can pass arguments to decorators
-      > Using wraps from functools we can avoid losing the attributes of the original function 
+1. Whenever Python exists Why does all the memory is not de-allocated / freed
+      (python garbage collector mechanism when Python exits?)
+1. Explain about Python decorators?
+      - A decorator in Python is any callable Python object that is used to modify a function or a class. Decorator is simply a callable object that takes a function as an input parameter
+      - Decorators can take arguments. We redefine our decorator.The outermost function takes the arguments,the next more inner function takes the function and the innermost function will be returned and will replace the original function
+      - Using wraps from functools we can avoid losing the attributes of the original function 
             __name__ (name of the function),
             __doc__ (the docstring) and
             __module__ (The module in which the function is defined)
 
-      > The __call__ method of a class is called, if the instance is called "like a function", i.e. using brackets.
+      - The __call__ method of a class is called, if the instance is called "like a function", i.e. using brackets.
+      - Use cases - argument checking, counting the no.of function calls
 
-      > Use cases - argument checking, counting the no.of function calls
-
-            
-4) What is Pickling and how does it different from Unpickling?
-5) Decorators used for Polynomial functions in Python
+      - The most basic type of decorator is the one used to register a function as a handler for an event. It allows two or more subsystems to communicate without knowing much about each other, what is formally known as a "decoupled" design. Python decorators used in this way are in a nice way implement observer pattern
       
-6) Callable objects of Python
+      - A decorator compatible with all functions regardless of their arguments, implemented with an inner function
+      ~~~py
+            def my_decorator(f):
+                  def wrapped(*args, **kwargs):
+                  # ...
+                  # insert code that runs before the decorated function
+                  # (and optionally decide to not call that function)
+                  # ...
+                  response = f(*args, **kwargs)
+                  # ...
+                  # insert code that runs after the decorated function
+                  # (and optionally decide to change the response)
+                  # ...
+                  return response
+            return wrapped
+      ~~~      
+            
+1. What is Pickling and how does it different from Unpickling?
+1. Decorators used for Polynomial functions in Python     
+1. Callable objects of Python
       > A callable object is an object which can be used and behaves like a function but might not be a function. It is possible to define classes in a way that the instances will be callable objects. The __call__ method is called, if the instance is called "like a function", 
-7)  write a fibonacci class using __call__
-8) Closures 
+1. write a fibonacci class using __call__
+1. Closures 
       > The local function is able to reference the outer scope through closures. Closures maintain references to objects from the earlier scope.   
       Closure is commonly used in what is referred to as Function Factory - these are functions that return other functions. 
       a closure is a combination of code and scope.  a closure is a function (object) that remembers its creation environment (enclosing scope).
       A Closure is a function object that remembers values in enclosing scopes even if they are not present in memory
-9) Global & non-local
+1. Global & non-local
       > global is a python keyword that introduces names from global namespace into the local namespace.
       The nonlocal keyword allows us to introduce names from enclosing namespace into the local namespace. 
 
 File realted questions:-
 -------------------------
-1) How do you check the file existence and their types in Python?
-2) How do you open a file in python?? and why??
-3) How do you check list of files in the given path in python ??
-4) How do you check whether file is exist or not in python
-5) How do you perform copy file cmd in python ??
-6) Explain how to delete a file in Python?
+1. How do you check the file existence and their types in Python?
+1. How do you open a file in python?? and why??
+1. How do you check list of files in the given path in python ??
+1. How do you check whether file is exist or not in python
+1. How do you perform copy file cmd in python ??
+1. Explain how to delete a file in Python?
 
 
 Collections(list,tuple,set,dictionary):-
 -----------------------------------------
-1) When to use list ?? tuple ?? set ?? and dictionary in python ??
-2) List out the each collections(list,tuple,set and dictinary)object type. i.e
-   List which are mutable objects and which are immutable objects ??
-   
-
-3) How will you remove the duplicate elements from the given list?
-4) What is the best approach to store a list of an employee’s first and last names?
-5) Why don't we use list as dictionary key??
+1. When to use list ?? tuple ?? set ?? and dictionary in python ??
+1. List out the each collections(list,tuple,set and dictinary)object type. i.e
+1. List which are mutable objects and which are immutable objects ??
+1. How will you remove the duplicate elements from the given list?
+1. What is the best approach to store a list of an employee’s first and last names?
+1. Why don't we use list as dictionary key??
 
 
 ```OOPS```
@@ -232,10 +242,7 @@ Collections(list,tuple,set,dictionary):-
       - Will the value of "OurAtt" be needed by the possible users of our class? If not, we can or should make it a private attribute.
       - If it has to be accessed, we make it accessible as a public attribute
       - We will define it as a private attribute with the corresponding property, if and only if we have to do some checks or transformation of the data.
-      - Alternatively, you could use a getter and a setter, but using a property is the Pythonic way to deal with it!
-            
-
-
+      - Alternatively, you could use a getter and a setter, but using a property is the Pythonic way to deal with it!    
 
 25) How to add a counter attribute to find the no. of times a function is invoked - Using an attribute of function
 26) method vs function: 
@@ -454,7 +461,7 @@ PySpark
 1. docker image - jupyter/pyspark-notebook 
     - ` $ docker run -it -p 8888:8888 --name pyspark-notebook jupyter/pyspark-notebook `
     - ` $ docker exec -it pyspark-notebook bash `
-
+    - ` $ docker container exec -it pyspark_web_1 bash`            
 
 
 
@@ -465,10 +472,9 @@ Bokeh
 
 Flask
 --------------
-
 1. what are microservices
-2. data migration
-3. Flask & NodeJs - comparision
+1. data migration
+1. Flask & NodeJs - comparision
 
 
 
@@ -508,7 +514,7 @@ interview questions - bogotobogo
 
 
 20. Making a list with unique element from a list with duplicate elements
-21. *args and **kwargs
+
 22. mutable vs immutable
 23. Difference between remove, del and pop on lists
 24. Join with new line
@@ -659,6 +665,8 @@ interview questions - bogotobogo
       1. https://www.python-course.eu/polynomial_class_in_python.php
       1. https://python-course.eu/python3_generators.php
       1. https://python-course.eu/python3_iterable_iterator.php
+      1. https://blog.miguelgrinberg.com/post/the-ultimate-guide-to-python-decorators-part-i-function-registration
+      1. https://blog.miguelgrinberg.com/post/the-ultimate-guide-to-python-decorators-part-ii-altering-function-behavior
 
 1. PySpark
       1. https://realpython.com/pyspark-intro/
