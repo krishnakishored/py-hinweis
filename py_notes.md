@@ -374,7 +374,27 @@ Concurrency :-
 * asynchio
 * At the heart of async IO are coroutines. A coroutine is a specialized version of a Python generator function. 
 
+* Celery
+      - Celery is an asynchronous task queue. You can use it to execute tasks outside of the context of your application. The general idea is that any resource consuming tasks that your application may need to run can be offloaded to the task queue, leaving your application free to respond to client requests.
+      - Core components
+            - `Celery client` is used to issue background jobs. When working with Flask, the client runs with the Flask application.
+            - `Celery workers` are the processes that run the background jobs. Celery supports local and remote workers 
+            - `Message broker` The client communicates with the the workers through a message queue, and Celery supports several ways to implement these queues. The most commonly used brokers are RabbitMQ and Redis.
+      - Any functions that you want to run as background tasks need to be decorated with the `celery.task` decorator. 
+      - using `apply_async()`, you can give Celery more detailed instructions about how the background task is to be executed. A useful option is to request that the task executes at some point in the future. The return value of delay() and apply_async() is an object that represents the task, and this object can be used to obtain status. 
+      ~~~py
 
+            @celery.task
+            def my_background_task(arg1, arg2):
+            # some long running task here
+            return result
+
+            # will schedule the task to run in about a minute
+            task = my_background_task.apply_async(args=[10, 20], countdown=60)
+            # task = my_background_task.delay(10, 20) # delay() is shortcut to apply_async
+
+      ~~~
+      
 
 ----
 Handling JSON
@@ -659,7 +679,9 @@ interview questions - bogotobogo
 
 1. magic-methods - https://www.python-course.eu/python3_magic_methods.php
 
-1. Threads -  https://pymotw.com/3/threading/#thread-objects
+1. Threads & tasks 
+      - https://pymotw.com/3/threading/#thread-objects
+      - https://blog.miguelgrinberg.com/post/using-celery-with-flask
 
 1. Decorators - Iterators - Generators
       1. https://www.python-course.eu/polynomial_class_in_python.php
