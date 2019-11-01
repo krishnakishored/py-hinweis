@@ -404,6 +404,15 @@ Handling JSON
 
 Numpy & Pandas
 --------------
+
+* Pandas
+      -  Pandas is used for data manipulation and analysis. It provides special data structures and operations for the manipulation of numerical tables and time series.
+      - A big advantage to NumPy arrays is obvious from the previous example: We can use arbitrary indices.
+
+      - A `Series` is a one-dimensional labelled array-like object. It is capable of holding any data type, e.g. integers, floats, strings, Python objects, and so on. It can be seen as a data structure with two arrays: one functioning as the index, i.e. the labels, and the other one contains the actual data.
+      - The underlying idea of a `DataFrame` is based on spreadsheets. We can see the data structure of a DataFrame as tabular and spreadsheet-like. A DataFrame logically corresponds to a "sheet" of an Excel document. A DataFrame has both a row and a column index
+
+
 - Hinton diagram. The size of a square within this diagram corresponds to the size of the value of the depicted matrix. The colour determines, if the value is positive or negative. 
 
 - The main benefits of using numpy arrays should be smaller memory consumption and better runtime behaviour.
@@ -693,3 +702,6 @@ interview questions - bogotobogo
 1. PySpark
       1. https://realpython.com/pyspark-intro/
       1. https://levelup.gitconnected.com/using-docker-and-pyspark-134cd4cab867
+
+1. Numeric
+      1. https://www.python-course.eu/pandas.php
