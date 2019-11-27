@@ -460,10 +460,10 @@ PySpark
       - Spark shell creates a "sc" object for you
 
 
-1. To interact with PySpark, you create specialized data structures called Resilient Distributed Datasets (RDDs). 
+1. To interact with PySpark, you create specialized data structures called `Resilient Distributed Dataset` (RDDs). 
    RDDs hide all the complexity of transforming and distributing your data automatically across multiple nodes by a scheduler if you’re running on a cluster.
 
-1. You can create RDDs in a number of ways, - `parallelize()`, `textFile()`, ... 
+1. You can create RDDs in a number of ways, - `parallelize()`, `textFile()`, hive, ... 
       - The PySpark `parallelize()` function can transform some Python data structures like lists and tuples into RDDs, which gives you functionality that makes them fault-tolerant and distributed. `parallelize()` turns that iterator into a distributed set of numbers and gives you all the capability of Spark’s infrastructure.
 
 1. One of the key distinctions between RDDs and other data structures is that processing is delayed until the result is requested. 
@@ -485,7 +485,7 @@ PySpark
 1. You can use the `spark-submit` command installed along with Spark to submit PySpark code to a cluster using the command line. This command takes a PySpark or Scala program and executes it on a cluster. 
 
 1. PySpark Shell - `$ /usr/local/spark/bin/pyspark`
-    - You didn’t have to create a SparkContext variable in the Pyspark shell example. The PySpark shell automatically creates a variable, sc, to connect you to the Spark engine in single-node mode.
+    - You don’t have to create a SparkContext variable in the Pyspark shell example. The PySpark shell automatically creates a variable, sc, to connect you to the Spark engine in single-node mode.
     - You must create your own SparkContext when submitting real PySpark programs with spark-submit or a Jupyter notebook.
 
 1. HDFS - Hadoop Distributed File System

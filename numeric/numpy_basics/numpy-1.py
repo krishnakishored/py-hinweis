@@ -2,9 +2,7 @@
 
 import numpy as np
 
-
 from sys import getsizeof as size # calculate the memory consumption of the list
-
 
 #celsius
 cvalues = [20.1, 20.8, 21.9, 22.5, 22.7, 22.3, 21.8, 21.2, 20.9, 20.1]
