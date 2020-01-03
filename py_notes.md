@@ -497,6 +497,64 @@ PySpark
     - ` $ docker exec -it pyspark-notebook bash `
     - ` $ docker container exec -it pyspark_web_1 bash`            
 
+Pytest
+--------------
+1. pytest can be used for all types and levels of software testing.
+1. Test files which pytest will use for testing have to start with test_ or end with _test.py
+1. Test functions can be marked or tagged by decorating them with `pytest.mark`.
+1. From pytest ver 4.5, marjers have to be registered in the init file `pytest.ini` placed in the test directory.
+1. `@pytest.mark.skipif()`, `@pytest.mark.skip()`  - conditional, unconditional skips
+1.  We can add custom command line options to pytest with the pytest_addoption hook that allows us to manage the command line parser and the setup for each test - `@pytest.fixture`
+      - The data that you create as an input is known as a `fixture`.   
+      - It’s common practice to create fixtures and reuse them.  Fixtures are used when we want to run some code before every test method. So instead of repeating the same code in every test we define fixtures.  
+      - Usually, fixtures are used to initialize database connections, pass the base , etc   
+      - A test method can use a fixture by mentioning the fixture as an input parameter.
+      ~~~ py
+      import pytest
+      @pytest.fixture
+      def supply_AA_BB_CC():
+            '''returns a list'''
+            aa=25
+            bb =35
+            cc=45
+            return [aa,bb,cc]
+
+      def test_comparewithAA(supply_AA_BB_CC):
+            zz=35
+            assert supply_AA_BB_CC[0]==zz,"aa and zz comparison failed"
+      ~~~
+1. The purpose of parameterizing a test is to run a test against multiple sets of arguments. We can do this by `@pytest.mark.parametrize`
+      ~~~py
+      import pytest
+      @pytest.mark.parametrize("input1, input2, output",[(5,5,10),(3,5,12)])
+      def test_add(input1, input2, output):
+      	assert input1+input2 == output,"failed"
+      ~~~
+1. The xfailed test will be executed, but it will not be counted as part failed or passed tests. There will be no traceback displayed if that test fails. We can xfail tests using `@pytest.mark.xfail` . Skipping a test means that the test will not be executed. `@pytest.mark.skip`
+
+
+
+
+
+
+1. Pytest allows us to run tests in parallel - `pip install pytest-xdist`  
+1. Commands  
+       - `$ pytest`  
+       - `$ pytest -v`  
+       - `$ pytest -k foobar` , `$ pytest -k 'plus or fibo'`   
+          To execute only tests, which contain a given substring in their name.   
+          `$ pytest -k method1 -v`  
+          `-k` <expression> is used to represent the substring to match, `-v` increases the verbosity  
+       - `$ pytest --markers` - to see the markers which exist for your test suite.  `pytest -m <name>`  `-m` <name> mentions the marker name  
+       - `$ pytest -svv -k "slow" ` - start all tests which are not marked as slow  
+       - `$ pytest -s -v` - to see the print statement in the function  
+       - `$ pytest --fixtures` - This lists out some inbuilt pytest fixtures, as well as our custom fixtures.   
+       - `$ py.test -n 4` `-n` <num> runs the tests by using multiple workers(4 here)
+
+
+
+
+ 
 
 
 Bokeh
@@ -768,3 +826,7 @@ interview questions - bogotobogo
 
 1. Numeric
       1. https://www.python-course.eu/pandas.php
+
+1. Pytest
+      1. https://www.python-course.eu/python3_pytest.php
+      1. https://semaphoreci.com/community/tutorials/testing-python-applications-with-pytest
