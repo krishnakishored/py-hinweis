@@ -4,7 +4,7 @@
 1. Mention few benefits of using Python?
 1. Does Python allow arguments Pass by Value or Pass by Reference?
 1. Why is the “pass” keyword used for in Python?
-1. Why is <__init__.py> module used for?
+1. Why is <__init__.py> module used for
 1. Differentiate between .py and .pyc files?
 1. Explain how Python does Compile-time and Run-time code checking?
 1. How memory is managed in Python?
@@ -130,7 +130,7 @@ python iterators related questions:-
       > A set comprehension is similar to a list comprehension, but returns a set and not a list. Syntactically, we use curly brackets instead of square brackets to create a set.
 
 1. What are itertools?
-* itertools is best viewed as a collection of building blocks that can be combined to form specialized “data pipelines” 
+* itertools is best viewed as a collection of building blocks that can be combined to form specialized "data pipelines". Loosely speaking, this means that the functions in itertools "operate" on iterators to produce more complex iterators.
 * There are two main reasons why such an “iterator algebra” is useful: improved memory efficiency (via lazy evaluation) and faster execuction time. 
       
 
@@ -242,7 +242,8 @@ Collections(list,tuple,set,dictionary):-
       - Will the value of "OurAtt" be needed by the possible users of our class? If not, we can or should make it a private attribute.
       - If it has to be accessed, we make it accessible as a public attribute
       - We will define it as a private attribute with the corresponding property, if and only if we have to do some checks or transformation of the data.
-      - Alternatively, you could use a getter and a setter, but using a property is the Pythonic way to deal with it!    
+      - Alternatively, you could use a getter and a setter, but using a property is the Pythonic way to deal with it!   
+      - A method which is used for getting a value ('x') is decorated with "@property" .  The method which has to function as the setter is decorated with "@x.setter"
 
 25) How to add a counter attribute to find the no. of times a function is invoked - Using an attribute of function
 26) method vs function: 
@@ -265,6 +266,9 @@ There is no "real" destructor, but something similar, i.e. the method __del__. I
 
       Python is implicitly polymorphic.We can call a function with various types
 
+29. Difference between type and isinstance
+      -  We see that isinstance returns True if we compare an object either with the class it belongs to or with the superclass. 
+      - Whereas the equality operator only returns True, if we compare an object with its own class.
 
 ----
 Exception Handling:-
@@ -369,11 +373,13 @@ Concurrency :-
 
 * ThreadPoolExecutor
       - There’s an easier way to start up a group of threads than the one you saw above. It’s called a ThreadPoolExecutor, and it’s part of the standard library in concurrent.futures 
-      
 
 * asynchio
-* At the heart of async IO are coroutines. A coroutine is a specialized version of a Python generator function. 
+      1.  At the heart of async IO are `coroutines`. A coroutine is a specialized version of a Python generator function. 
+      1. a coroutine object is awaitable, so another coroutine can await it.
+      1. `time.sleep()` can represent any time-consuming blocking function call, while `asyncio.sleep()` is used to stand in for a non-blocking call 
 
+      
 * Celery
       - Celery is an asynchronous task queue. You can use it to execute tasks outside of the context of your application. The general idea is that any resource consuming tasks that your application may need to run can be offloaded to the task queue, leaving your application free to respond to client requests.
       - Core components
@@ -618,16 +624,6 @@ re.X	It ignores whitespace (except inside a set [] or when escaped by a backslas
 (?<!learn)	Negative Lookbehind	Asserts that what immediately precedes the current position in the string is not learn          
 
 
-
-
-Flask
---------------
-1. what are microservices
-1. data migration
-1. Flask & NodeJs - comparision
-
-
-
 ``` Questions from Cookbook```
 
 
@@ -658,9 +654,11 @@ interview questions - bogotobogo
             - We want a method, which we can call via the class name or via the instance name without the necessity of passing a reference to an instance to it. The solution consists in static methods, which don't need a reference to an instance. It's easy to turn a method into a static method. 
             - All we have to do is to add a line with "@staticmethod" directly in front of the method header. It's the decorator syntax. 
 
-      * Static methods shouldn't be confused with class methods. Like static methods class methods are not bound to instances, but unlike static methods class methods are bound to a class. The first parameter of a class method is a reference to a class, i.e. a class object. They can be called via an instance or the class name. 
+      * `Static methods shouldn't be confused with class methods. Like static methods class methods are not bound to instances, but unlike static methods class methods are bound to a class`. The first parameter of a class method is a reference to a class, i.e. a class object. They can be called via an instance or the class name. 
             - They are often used, where we have static methods, which have to call other static methods. To do this, we would have to hard code the class name, if we had to use static methods. This is a problem, if we are in a use case, where we have inherited classes.
-            - They are used in the definition of factory methods
+            - The use cases of class methods:
+                  - the are used in the definition of the so-called factory methods, which we will not cover here.
+                  - They are often used, where we have static methods, which have to call other static methods. To do this, we would have to hard code the class name, if we had to use static methods. This is a problem, if we are in a use case, where we have inherited classes.
 
 
 20. Making a list with unique element from a list with duplicate elements
@@ -830,3 +828,8 @@ interview questions - bogotobogo
 1. Pytest
       1. https://www.python-course.eu/python3_pytest.php
       1. https://semaphoreci.com/community/tutorials/testing-python-applications-with-pytest
+
+1. Concurrency
+      1. https://realpython.com/async-io-python/
+      1. https://towardsdatascience.com/fast-and-async-in-python-accelerate-your-requests-using-asyncio-62dafca83c33
+      1. https://realpython.com/python-concurrency/

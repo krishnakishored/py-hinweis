@@ -93,30 +93,6 @@ def primes(n):
         p = {x for x in range(2, n + 1) if x not in no_p}
     return p
 
-    
-###############################################################################
-# https://www.hackerrank.com/challenges/list-comprehensions/problem
-def hr_listcomprehension(x,y,z,n):
-    return [[a,b,c] for a in range(x+1) for b in range(y+1) for c in range(z+1) if a+b+c!=n]
-
-
-# https://www.hackerrank.com/challenges/find-second-maximum-number-in-a-list/problem 
-def hr_second_max(mylist):
-    temp = mylist.copy()
-    first_max = max(temp)
-    while max(temp) == first_max:
-        temp.remove(first_max)
-    return max(temp)
-
-
-# https://www.hackerrank.com/challenges/nested-list/problem
-def nested_lists_second_min(marksheet):
-    # print([marks for name, marks in marksheet]) # [37.21, 37.21, 37.2, 41.0, 39.0]
-    second_highest = sorted(list(set([marks for name, marks in marksheet])))[1]
-    print('\n'.join([a for a,b in sorted(marksheet) if b == second_highest]))
-    # print('\n'.join([a[0] for a in sorted(marksheet) if a[1] == second_highest]))
-     
-
 if __name__ == "__main__":
     # comprehension_list_1()
    
@@ -140,9 +116,9 @@ if __name__ == "__main__":
         # name = input()
         # score = float(input())
         # marksheet.append([name,score]) # build a nested list
-    n = int(input())
-    marksheet = [[input(), float(input())] for _ in range(n)]
+    # n = int(input())
+    # marksheet = [[input(), float(input())] for _ in range(n)]
 
-    print(marksheet)
-    nested_lists_second_min(marksheet)   
-    
+    # print(marksheet)
+    # nested_lists_second_min(marksheet)   
+

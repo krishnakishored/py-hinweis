@@ -147,10 +147,10 @@ def itertools_4():
         
 
 if __name__=="__main__":
-    # itertools_1()
+    itertools_1()
     # itertools_2() 
     # itertools_3()
-    itertools_4()
+    # itertools_4()
 
 
 
