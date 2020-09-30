@@ -378,6 +378,27 @@ Concurrency :-
       1.  At the heart of async IO are `coroutines`. A coroutine is a specialized version of a Python generator function. 
       1. a coroutine object is awaitable, so another coroutine can await it.
       1. `time.sleep()` can represent any time-consuming blocking function call, while `asyncio.sleep()` is used to stand in for a non-blocking call 
+      1. `Futures` and `coroutines` are both things that you can wait for.
+      1. You can make a coroutine by declaring it with `async def`
+      1. Almost always, a coroutine will `await` something such as some blocking IO. When we await, we actually yield control to the scheduler so it can do other work and wake us up later, when something interesting has happened.
+      1. You can make a future out of a coroutine, but often you don’t need to. Bear in mind that if you do want to make a future, you should use `ensure_future`, but this actually runs what you pass to it – it doesn’t just create a future      
+      1. The right way to block waiting for a `future` outside of a coroutine is to ask the event loop to do it
+      1. To run several things concurrently, we make a future that is the combination of several other futures. 
+         `asyncio` can make a future like that out of coroutines using `asyncio.gather`. 
+         asyncio.gather won’t necessarily run your coroutines in order, but it will return a list of results in the same order as its input.
+         `run_until_complete` returns the result of the future created by `gather` – a list of all the results from the individual coroutines.
+      1. When we want to block everything until we have a result, we can use something like `run_until_complete` but in an `async` context we want to yield control to the scheduler and let it give us back control when the coroutine has finished. We do that by using `await`
+      1. `asyncio.gather` takes in some futures/coroutines and returns a future that collects their results (in order).
+         If, instead, you want to get results as soon as they are available, you need to write a second coroutine that deals with each result by looping through the results of `asyncio.as_completed` and awaiting each one.
+      1. asyncio.as_completed returns an iterable sequence of futures, each of which must be awaited, so it must run inside a coroutine, which must be waited for too.
+         The argument to asyncio.as_completed has to be a list of coroutines or futures, not an iterable, so you can’t use it with a very large list of items that won’t fit in memory
+      1. `asyncio.wait` – it also takes a list of futures and waits for all of them to complete (like `gather`), or, with other arguments, for one of them to complete or one of them to fail. It then returns two sets of futures: done and not-done. Each of these must be awaited to get their results
+
+
+* aiohttp
+      1. `Aiohttp` recommends to use `ClientSession` as primary interface to make requests. ClientSession allows you to store cookies between requests and keeps objects that are common for all requests (event loop, connection and other things). Session needs to be closed after using it, and closing session is another asynchronous operation, this is why you need `async with` every time you deal with sessions.
+
+
 
       
 * Celery
@@ -833,3 +854,6 @@ interview questions - bogotobogo
       1. https://realpython.com/async-io-python/
       1. https://towardsdatascience.com/fast-and-async-in-python-accelerate-your-requests-using-asyncio-62dafca83c33
       1. https://realpython.com/python-concurrency/
+      1. https://www.artificialworlds.net/blog/2017/05/31/basic-ideas-of-python-3-asyncio-concurrency/
+      1. https://www.artificialworlds.net/blog/2017/05/31/python-3-large-numbers-of-tasks-with-limited-concurrency/
+      1. https://pawelmhm.github.io/asyncio/python/aiohttp/2016/04/22/asyncio-aiohttp.html
