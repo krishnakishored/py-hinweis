@@ -11,7 +11,7 @@ Jinja2==2.10.3
 kombu==4.6.5
 MarkupSafe==1.1.1
 more-itertools==7.2.0
-numpy==1.17.2
+numpy==1.22.0
 pandas==0.25.1
 py4j==0.10.7
 pyspark==2.4.4
