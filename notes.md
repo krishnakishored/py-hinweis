@@ -138,3 +138,67 @@ brew install uv
 - Commit both requirements.txt and uv.lock
 - Use `--dev` flag for development dependencies
 - Use `uv pip sync` instead of install for reproducible environments
+
+## GitHub SSH Setup
+
+### Generating SSH Keys
+1. Generate new SSH key:
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+- Use RSA alternatively if ed25519 is not supported:
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+2. Start SSH agent:
+```bash
+eval "$(ssh-agent -s)"
+```
+
+3. Add SSH key to agent:
+```bash
+ssh-add ~/.ssh/id_ed25519
+```
+
+### Adding SSH Key to GitHub
+1. Copy public key:
+```bash
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+
+2. Add to GitHub:
+   - Go to GitHub → Settings → SSH and GPG keys
+   - Click "New SSH key"
+   - Paste your key and save
+
+### Testing Connection
+```bash
+ssh -T git@github.com
+```
+
+### Using SSH URLs
+- Change remote URL from HTTPS to SSH:
+```bash
+git remote set-url origin git@github.com:username/repository.git
+```
+```sh
+# update .git/config 
+[remote "origin"]
+	url = git@github-krishnakishored:krishnakishored/py-hinweis.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+
+# github-krishnakishored is a setup in ~/.ssh/config
+```
+
+- Verify remote URL:
+```bash
+git remote -v
+```
+
+### Best Practices
+1. Use unique SSH keys for different services
+2. Keep private keys secure and never share them
+3. Use SSH config file (~/.ssh/config) for multiple accounts
+4. Regularly rotate SSH keys for security
+5. Back up your SSH keys securely
