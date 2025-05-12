@@ -25,13 +25,15 @@ pytest
 ```
 
 2. Run tests with verbose output:
-```bash
+```bashß
 pytest -v
 ```
 
 3. Run specific test file:
 ```bash
 pytest tests/test_demo.py
+## Run specific test function:
+uv run pytest test/test_arrays_and_strings.py::test_first_unique_char
 ```
 
 4. Run tests matching a pattern:

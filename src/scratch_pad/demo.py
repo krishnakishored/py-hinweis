@@ -1,3 +1,6 @@
+from collections import Counter
+
+
 class Demo:
     def __init__(self):
         pass
@@ -33,3 +36,58 @@ class Demo:
             f"{i}: {season}" for i, season in enumerate(seasons)
         ]
         print(f"Indexed list: {indexed_seasons}")
+
+    def demonstrate_counter(self):
+        """
+        Demonstrates various uses of collections.Counter in Python
+
+        Counter is a dict subclass for counting hashable objects.
+        It provides a dictionary where elements are stored as dictionary keys
+        and their counts are stored as dictionary values.
+        """
+        # Basic Counter usage with a list
+        colors = ["red", "blue", "red", "green", "blue", "blue"]
+        color_counts = Counter(colors)
+        print(
+            f"Color counts: {color_counts}"
+        )  # Counter({'blue': 3, 'red': 2, 'green': 1})
+
+        # Counter with strings
+        text = "mississippi"
+        char_counts = Counter(text)
+        print(
+            f"Character counts: {char_counts}"
+        )  # Counter({'i': 4, 's': 4, 'p': 2, 'm': 1})
+
+        # Updating Counter
+        more_colors = ["blue", "green", "yellow"]
+        color_counts.update(more_colors)
+        print(f"Updated counts: {color_counts}")
+
+        # Most common elements
+        print(f"Most common colors: {color_counts.most_common(2)}")
+
+        # Operations with Counters
+        counter1 = Counter(["a", "b", "c", "a"])
+        counter2 = Counter(["a", "d", "e", "a"])
+
+        # Addition of counters
+        print(f"Counter1 + Counter2: {counter1 + counter2}")
+
+        # Subtraction of counters
+        print(f"Counter1 - Counter2: {counter1 - counter2}")
+
+        # Intersection (taking minimum of each count)
+        print(f"Counter1 & Counter2: {counter1 & counter2}")
+
+        # Union (taking maximum of each count)
+        print(f"Counter1 | Counter2: {counter1 | counter2}")
+
+        # Converting to list of elements
+        print(f"List of all elements: {list(color_counts.elements())}")
+
+        # Getting count of a specific element
+        print(f"Count of 'blue': {color_counts['blue']}")
+
+        # Getting count of non-existent element (returns 0 instead of KeyError)
+        print(f"Count of 'purple': {color_counts['purple']}")  # returns 0
