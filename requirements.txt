@@ -19,3 +19,4 @@ six==1.15.0
 urllib3==1.25.10
 Werkzeug==1.0.1
 yarl==1.6.0
+pytest>=7.0.0
