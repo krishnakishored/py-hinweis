@@ -28,15 +28,15 @@ def test_first_unique_char(solution):
 
 def test_merge_intervals(solution):
     print("\nRunning test_merge_intervals...")
-    assert solution.merge([[1, 3], [2, 6], [8, 10], [15, 18]]) == [
+    assert solution.mergeIntervals([[1, 3], [2, 6], [8, 10], [15, 18]]) == [
         [1, 6],
         [8, 10],
         [15, 18],
     ]
-    assert solution.merge([[1, 4], [4, 5]]) == [[1, 5]]
-    assert solution.merge([[1, 3]]) == [[1, 3]]  # single interval
-    assert solution.merge([]) == []  # empty list
-    assert solution.merge([[1, 4], [2, 3]]) == [
+    assert solution.mergeIntervals([[1, 4], [4, 5]]) == [[1, 5]]
+    assert solution.mergeIntervals([[1, 3]]) == [[1, 3]]  # single interval
+    assert solution.mergeIntervals([]) == []  # empty list
+    assert solution.mergeIntervals([[1, 4], [2, 3]]) == [
         [1, 4]
     ]  # completely overlapping
 
@@ -45,22 +45,22 @@ def test_rotate_array(solution):
     print("\nRunning test_rotate_array...")
     # Test case 1: Basic rotation
     nums1 = [1, 2, 3, 4, 5, 6, 7]
-    solution.rotate(nums1, 3)
+    solution.rotateArray(nums1, 3)
     assert nums1 == [5, 6, 7, 1, 2, 3, 4]
 
     # Test case 2: Rotation with k > array length
     nums2 = [-1, -100, 3, 99]
-    solution.rotate(nums2, 6)  # equivalent to rotating by 2
+    solution.rotateArray(nums2, 6)  # equivalent to rotating by 2
     assert nums2 == [3, 99, -1, -100]
 
     # Test case 3: Empty array
     nums3 = []
-    solution.rotate(nums3, 0)
+    solution.rotateArray(nums3, 0)
     assert nums3 == []
 
     # Test case 4: Single element
     nums4 = [1]
-    solution.rotate(nums4, 1)
+    solution.rotateArray(nums4, 1)
     assert nums4 == [1]
 
 
