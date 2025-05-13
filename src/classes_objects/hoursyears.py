@@ -1,18 +1,19 @@
 # https://www.python-course.eu/python3_multiple_inheritance.php
 
-""" 
+"""
 The class Clock is used to simulate a clock.
 """
 
+
 class Clock(object):
-    '''
-    we added additional code for checking the plausibility of the time data into the set method. 
-    We call the set method from the __init__ method as well, because we want to circumvent redundant code. 
-    '''
+    """
+    we added additional code for checking the plausibility of the time data into the set method.
+    We call the set method from the __init__ method as well, because we want to circumvent redundant code.
+    """
 
     def __init__(self, hours, minutes, seconds):
         """
-        The paramaters hours, minutes and seconds have to be 
+        The paramaters hours, minutes and seconds have to be
         integers and must satisfy the following equations:
         0 <= h < 24
         0 <= m < 60
@@ -23,7 +24,7 @@ class Clock(object):
 
     def set_Clock(self, hours, minutes, seconds):
         """
-        The parameters hours, minutes and seconds have to be 
+        The parameters hours, minutes and seconds have to be
         integers and must satisfy the following equations:
         0 <= h < 24
         0 <= m < 60
@@ -35,7 +36,7 @@ class Clock(object):
         else:
             raise TypeError("Hours have to be integers between 0 and 23!")
         if type(minutes) == int and 0 <= minutes and minutes < 60:
-            self.__minutes = minutes 
+            self.__minutes = minutes
         else:
             raise TypeError("Minutes have to be integers between 0 and 59!")
         if type(seconds) == int and 0 <= seconds and seconds < 60:
@@ -44,13 +45,13 @@ class Clock(object):
             raise TypeError("Seconds have to be integers between 0 and 59!")
 
     def __str__(self):
-        return "{0:02d}:{1:02d}:{2:02d}".format(self._hours,
-                                                self.__minutes,
-                                                self.__seconds)
+        return "{0:02d}:{1:02d}:{2:02d}".format(
+            self._hours, self.__minutes, self.__seconds
+        )
 
     def tick(self):
         """
-        This method lets the clock "tick", this means that the 
+        This method lets the clock "tick", this means that the
         internal time will be advanced by one second.
 
         Examples:
@@ -82,14 +83,15 @@ class Clock(object):
 """ 
 The class Calendar implements a calendar.   
 """
-class Calendar(object):
 
-    months = (31,28,31,30,31,30,31,31,30,31,30,31)
+
+class Calendar(object):
+    months = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
     date_style = "British"
 
     @staticmethod
     def leapyear(year):
-        """ 
+        """
         The method leapyear returns True if the parameter year
         is a leap year, False otherwise
         """
@@ -102,19 +104,17 @@ class Calendar(object):
         else:
             return True
 
-
     def __init__(self, d, m, y):
         """
-        d, m, y have to be integer values and year has to be 
+        d, m, y have to be integer values and year has to be
         a four digit year number
         """
 
-        self.set_Calendar(d,m,y)
-
+        self.set_Calendar(d, m, y)
 
     def set_Calendar(self, d, m, y):
         """
-        d, m, y have to be integer values and year has to be 
+        d, m, y have to be integer values and year has to be
         a four digit year number
         """
 
@@ -125,30 +125,27 @@ class Calendar(object):
         else:
             raise TypeError("d, m, y have to be integers!")
 
-
     def __str__(self):
         if Calendar.date_style == "British":
-            return "{0:02d}/{1:02d}/{2:4d}".format(self.__days,
-                                                   self.__months,
-                                                   self.__years)
-        else: 
+            return "{0:02d}/{1:02d}/{2:4d}".format(
+                self.__days, self.__months, self.__years
+            )
+        else:
             # assuming American style
-            return "{0:02d}/{1:02d}/{2:4d}".format(self.__months,
-                                                   self.__days,
-                                                   self.__years)
-
-
+            return "{0:02d}/{1:02d}/{2:4d}".format(
+                self.__months, self.__days, self.__years
+            )
 
     def advance(self):
         """
         This method advances to the next date.
         """
 
-        max_days = Calendar.months[self.__months-1]
+        max_days = Calendar.months[self.__months - 1]
         if self.__months == 2 and Calendar.leapyear(self.__years):
             max_days += 1
         if self.__days == max_days:
-            self.__days= 1
+            self.__days = 1
             if self.__months == 12:
                 self.__months = 1
                 self.__years += 1
@@ -157,42 +154,41 @@ class Calendar(object):
         else:
             self.__days += 1
 
+
 if __name__ == "__main__":
-    print('Multi Inheritance: ')
-    print('Clock: ')
-    x = Clock(23,59,59)
+    print("Multi Inheritance: ")
+    print("Clock: ")
+    x = Clock(23, 59, 59)
     print(x)
     x.tick()
     print(x)
     y = str(x)
-    print(type(y))    
-    
-    print('Calender: ')
-    x = Calendar(31,12,2012)
+    print(type(y))
+
+    print("Calender: ")
+    x = Calendar(31, 12, 2012)
     print(x, end=" ")
     x.advance()
     print("after applying advance: ", x)
     print("2012 was a leapyear:")
-    x = Calendar(28,2,2012)
+    x = Calendar(28, 2, 2012)
     print(x, end=" ")
     x.advance()
     print("after applying advance: ", x)
-    x = Calendar(28,2,2013)
+    x = Calendar(28, 2, 2013)
     print(x, end=" ")
     x.advance()
     print("after applying advance: ", x)
     print("1900 no leapyear: number divisible by 100 but not by 400: ")
-    x = Calendar(28,2,1900)
+    x = Calendar(28, 2, 1900)
     print(x, end=" ")
     x.advance()
     print("after applying advance: ", x)
     print("2000 was a leapyear, because number divisibe by 400: ")
-    x = Calendar(28,2,2000)
+    x = Calendar(28, 2, 2000)
     print(x, end=" ")
     x.advance()
     print("after applying advance: ", x)
     print("Switching to American date style: ")
     Calendar.date_style = "American"
-    print("after applying advance: ", x)  
-
-    
+    print("after applying advance: ", x)

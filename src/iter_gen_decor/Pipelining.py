@@ -4,29 +4,31 @@ import random
 import time
 
 
-'''
+"""
 Generators can be used to pipeline commands similar to UNIX shell commands.
-'''
+"""
 
-#Creating a log files that is continuously updated.
+
+# Creating a log files that is continuously updated.
 def log(file_name):
     """Write some random log data"""
-    fobj = open(file_name,'w')
+    fobj = open(file_name, "w")
     while True:
-        value = random.randrange(0,50)
+        value = random.randrange(0, 50)
         if value < 10:
-            fobj.write('# comment\n')
+            fobj.write("# comment\n")
         else:
             fobj.write("%d\n" % value)
         fobj.flush()
         time.sleep(2)
 
 
-
-#-------------------------------------------------------------------------------
-#Now we can write a program with generators.
-#We read the file and wait if there are currently no more new lines until new ones are written:
+# -------------------------------------------------------------------------------
+# Now we can write a program with generators.
+# We read the file and wait if there are currently no more new lines until new ones are written:
 LIMIT = 1000
+
+
 def read_forever(fobj):
     """Read from a file as long as there are lines. Wait for the other process to write more lines."""
     counter = 0
@@ -39,14 +41,16 @@ def read_forever(fobj):
             continue
         yield line
 
-#Then we filter out all the comment lines:
+
+# Then we filter out all the comment lines:
 def filter_comments(lines):
-    '''Filter out lines Starting with #'''
+    """Filter out lines Starting with #"""
     for line in lines:
-        if not line.strip().startswith('#'):
+        if not line.strip().startswith("#"):
             yield line
 
-#we convert the entry in the line into an integer
+
+# we convert the entry in the line into an integer
 def get_number(lines):
     "Read the number in the line & convert it to an integer"
     for line in lines:
@@ -54,7 +58,7 @@ def get_number(lines):
 
 
 # Finally, we pipe all these together and calculate the sum of all numbers and print it on the screen:
-def show_sum(file_name='out.txt'):
+def show_sum(file_name="out.txt"):
     "Start all the generators and calculate the sum continuously"
     lines = read_forever(open(file_name))
     filtered_lines = filter_comments(lines)
@@ -63,20 +67,21 @@ def show_sum(file_name='out.txt'):
     try:
         for number in numbers:
             sum_ += number
-            sys.stdout.write('sum:%d\r' % sum_)
+            sys.stdout.write("sum:%d\r" % sum_)
             sys.stdout.flush()
     except KeyboardInterrupt:
-        print("sum:",sum_)
+        print("sum:", sum_)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
+
     def test():
         """Start logging"""
-        #import sys
+        # import sys
         file_name = sys.argv[1]
-        print("logging to ",file_name)
+        print("logging to ", file_name)
         log(file_name)
 
-#    test() # to write random numbers
+    #    test() # to write random numbers
     show_sum(sys.argv[1])

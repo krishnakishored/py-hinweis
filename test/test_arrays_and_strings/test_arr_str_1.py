@@ -1,7 +1,6 @@
 import pytest
 import os
 import sys
-from io import StringIO
 
 # Add src directory to Python path for imports
 sys.path.insert(

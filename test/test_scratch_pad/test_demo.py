@@ -1,7 +1,6 @@
 import pytest
 import os
 import sys
-from io import StringIO
 
 # Add src directory to Python path for imports
 sys.path.insert(
@@ -46,14 +45,14 @@ def test_demonstrate_enumerate(capsys):
 
     # Check if all expected outputs are in the captured output
     actual_outputs = captured.out.strip().split("\n")
-    assert len(actual_outputs) == len(
-        expected_outputs
-    ), "Number of outputs doesn't match"
+    assert len(actual_outputs) == len(expected_outputs), (
+        "Number of outputs doesn't match"
+    )
 
     for actual, expected in zip(actual_outputs, expected_outputs):
-        assert (
-            actual.strip() == expected
-        ), f"Expected '{expected}' but got '{actual}'"
+        assert actual.strip() == expected, (
+            f"Expected '{expected}' but got '{actual}'"
+        )
 
 
 def test_demo_initialization():

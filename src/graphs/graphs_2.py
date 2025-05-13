@@ -1,21 +1,23 @@
 from graphs import Graph
 
-g = { "a" : ["d"],
-      "b" : ["c"],
-      "c" : ["b", "c", "d", "e"],
-      "d" : ["a", "c"],
-      "e" : ["c"],
-      "f" : []
-    }
+g = {
+    "a": ["d"],
+    "b": ["c"],
+    "c": ["b", "c", "d", "e"],
+    "d": ["a", "c"],
+    "e": ["c"],
+    "f": [],
+}
 
-#updated g to test find_all_paths
-g = { "a" : ["d", "f"],
-      "b" : ["c"],
-      "c" : ["b", "c", "d", "e"],
-      "d" : ["a", "c"],
-      "e" : ["c"],
-      "f" : ["d"]
-    }
+# updated g to test find_all_paths
+g = {
+    "a": ["d", "f"],
+    "b": ["c"],
+    "c": ["b", "c", "d", "e"],
+    "d": ["a", "c"],
+    "e": ["c"],
+    "f": ["d"],
+}
 
 graph = Graph(g)
 
@@ -39,17 +41,18 @@ path = graph.find_path("c", "c")
 print(path)
 
 
-print('#################################')
+print("#################################")
 
 
-#updated g to test find_all_paths
-g = { "a" : ["d", "f"],
-      "b" : ["c"],
-      "c" : ["b", "c", "d", "e"],
-      "d" : ["a", "c"],
-      "e" : ["c"],
-      "f" : ["d"]
-    }
+# updated g to test find_all_paths
+g = {
+    "a": ["d", "f"],
+    "b": ["c"],
+    "c": ["b", "c", "d", "e"],
+    "d": ["a", "c"],
+    "e": ["c"],
+    "f": ["d"],
+}
 
 graph = Graph(g)
 

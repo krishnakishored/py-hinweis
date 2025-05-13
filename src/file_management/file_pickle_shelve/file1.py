@@ -1,7 +1,7 @@
-'''
+"""
 https://www.python-course.eu/python3_file_management.php
 
-'''
+"""
 ####################################################################
 
 
@@ -67,8 +67,8 @@ https://www.python-course.eu/python3_file_management.php
 ####################################################################
 # # Read and Write to the Same File
 
-# In the following example we will open a file for reading and writing at the same time. 
-# If the file doesn't exist, it will be created. If you want to open an existing file for read and write, 
+# In the following example we will open a file for reading and writing at the same time.
+# If the file doesn't exist, it will be created. If you want to open an existing file for read and write,
 # you should better use "r+", because this will not delete the content of the file.
 
 
@@ -76,7 +76,7 @@ https://www.python-course.eu/python3_file_management.php
 # fh.write('The colour brown')
 
 # # Go to the 12th byte in the file, counting starts with 0
-# fh.seek(11)   
+# fh.seek(11)
 # print(fh.read(5))#brown
 # print(fh.tell())#16
 # fh.seek(11)
@@ -89,7 +89,7 @@ https://www.python-course.eu/python3_file_management.php
 # "How to get into a Pickle"
 # With the algorithms of the pickle module we can serialize and de-serialize Python object structures
 
-# Objects which have been dumped to a file with pickle.dump can be reread into a program by using the method pickle.load(file). pickle.load recognizes automatically, which format had been used for writing the data. 
+# Objects which have been dumped to a file with pickle.dump can be reread into a program by using the method pickle.load(file). pickle.load recognizes automatically, which format had been used for writing the data.
 
 # import pickle
 # cities = ["Paris", "Dijon", "Lyon", "Strasbourg"]
@@ -102,8 +102,7 @@ https://www.python-course.eu/python3_file_management.php
 # f = open("data.pkl", "rb")
 # villes = pickle.load(f)
 # print(villes) # ['Paris', 'Dijon', 'Lyon', 'Strasbourg']
-# # Only the objects and not their names are saved. That's why we use the assignment to villes in the previous example, i.e. data = pickle.load(f). 
-
+# # Only the objects and not their names are saved. That's why we use the assignment to villes in the previous example, i.e. data = pickle.load(f).
 
 
 # # Pickling multiple objects
@@ -126,10 +125,9 @@ https://www.python-course.eu/python3_file_management.php
 import shelve
 # s = shelve.open("MyShelve")
 
-# If the file "MyShelve" already exists, the open method will try to open it. 
+# If the file "MyShelve" already exists, the open method will try to open it.
 # If it isn't a shelf file, - i.e. a file which has been created with the shelve module,
-# we will get an error message. If the file doesn't exist, it will be created. 
-
+# we will get an error message. If the file doesn't exist, it will be created.
 
 
 # s["street"] = "Fleet Str"
@@ -138,10 +136,10 @@ import shelve
 #     print(key)
 # s.close()
 
-# # We can use the previously created shelf file in another program or in an interactive Python session: 
+# # We can use the previously created shelf file in another program or in an interactive Python session:
 # print(s["street"]) # Fleet Str
 
-# # It is also possible to cast a shelf object into an "ordinary" dictionary with the dict function: 
+# # It is also possible to cast a shelf object into an "ordinary" dictionary with the dict function:
 # print(s) #<shelve.DbfilenameShelf object at 0x107ce6048>
 # t = dict(s)
 # print(t) # {'street': 'Fleet Str', 'city': 'London'}
@@ -152,7 +150,7 @@ import shelve
 # tele["Eve"] = {"first":"Eve", "last":"Naomi", "phone":"9069"}
 # print(tele["Eve"]["phone"]) # 9069
 
-# shelve.close() 
+# shelve.close()
 # # but the data is persistent
 
 
@@ -162,10 +160,10 @@ import shelve
 ####################################################################
 
 
-# The file cities_and_times.txt contains city names and times. 
-# Each line contains the name of the city, followed by the name of the day ("Sun") and the time in the form hh:mm. 
+# The file cities_and_times.txt contains city names and times.
+# Each line contains the name of the city, followed by the name of the day ("Sun") and the time in the form hh:mm.
 # Read in the file and create an alphabetically ordered list of the form
-# [('Amsterdam', 'Sun', (8, 52)), ('Anchorage', 'Sat', (23, 52)), ('Ankara', 'Sun', (10, 52)), ('Athens', 'Sun', (9, 52)), ('Atlanta', 'Sun', (2, 52)), ('Auckland', 'Sun', (20, 52)), ('Barcelona', 'Sun', (8, 52)), ('Beirut', 'Sun', (9, 52)), 
+# [('Amsterdam', 'Sun', (8, 52)), ('Anchorage', 'Sat', (23, 52)), ('Ankara', 'Sun', (10, 52)), ('Athens', 'Sun', (9, 52)), ('Atlanta', 'Sun', (2, 52)), ('Auckland', 'Sun', (20, 52)), ('Barcelona', 'Sun', (8, 52)), ('Beirut', 'Sun', (9, 52)),
 
 import pickle
 
@@ -175,23 +173,20 @@ lines.sort()
 cities = []
 
 for line in lines:
-    *city,day,time = line.split()
+    *city, day, time = line.split()
     hours, minutes = time.split(":")
-    cities.append((" ".join(city),day,(int(hours),int(minutes))))
+    cities.append((" ".join(city), day, (int(hours), int(minutes))))
     # cities.append((" ".join(city), day, (int(hours), int(minutes)) ))
-fh = open("cities_and_times.pkl","bw")    
-pickle.dump(cities,fh)
+fh = open("cities_and_times.pkl", "bw")
+pickle.dump(cities, fh)
 fh.close()
 
 # now it's persistent
 
-fh = open("cities_and_times.pkl","rb")    
-mycities =  pickle.load(fh)
-print(mycities[0]) #('Amsterdam', 'Sun', (8, 52))
+fh = open("cities_and_times.pkl", "rb")
+mycities = pickle.load(fh)
+print(mycities[0])  # ('Amsterdam', 'Sun', (8, 52))
 fh.close()
-
-
-
 
 
 ####################################################################

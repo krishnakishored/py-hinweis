@@ -3,6 +3,7 @@ import asyncio
 from aiohttp import ClientSession
 import pathlib
 
+
 def hello_synchronous():
     """multiple synchronous requests"""
     here = pathlib.Path(__file__).parent
@@ -13,6 +14,7 @@ def hello_synchronous():
         print(requests.get(url).text)
     # return requests.get("http://httpbin.org/get")
 
+
 async def hello_async(url):
     """First it fetches response asynchronously, then it reads response body in asynchronous manner.:"""
     async with ClientSession() as session:
@@ -20,11 +22,13 @@ async def hello_async(url):
             response = await response.read()
             print(response)
 
+
 def run_single_async():
     """To start your program you need to run it in event loop,
-     so you need to create instance of asyncio loop and put task into this loop."""
+    so you need to create instance of asyncio loop and put task into this loop."""
     loop = asyncio.get_event_loop()
     loop.run_until_complete(hello_async("http://httpbin.org/headers"))
+
 
 def run_multiple_async_wait():
     loop = asyncio.get_event_loop()
@@ -35,13 +39,17 @@ def run_multiple_async_wait():
     for i in range(5):
         task = asyncio.ensure_future(hello_async(url.format(i)))
         tasks.append(task)
-    loop.run_until_complete(asyncio.wait(tasks))            
+    loop.run_until_complete(asyncio.wait(tasks))
+
 
 """asyncio.gather() collects bunch of Future objects in one place and waits for all of them to finish."""
+
+
 async def fetch(url, session):
     async with session.get(url) as response:
         """NOT: return response.read():  async operation must be preceded by await """
-        return await response.read() 
+        return await response.read()
+
 
 async def run_with_async_gather(r):
     """Fetch all responses within one Client session"""
@@ -57,11 +65,11 @@ async def run_with_async_gather(r):
         # you now have all response bodies in this variable
         print(responses)
 
+
 def run_multiple_async_gather():
     loop = asyncio.get_event_loop()
     future = asyncio.ensure_future(run_with_async_gather(4))
     loop.run_until_complete(future)
-
 
 
 if __name__ == "__main__":

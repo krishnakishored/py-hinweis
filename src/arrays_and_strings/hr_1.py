@@ -2,7 +2,6 @@
 
 
 def count_substring(string, sub_string):
-
     return count
 
 
@@ -10,7 +9,6 @@ def count_substring(string, sub_string):
 
 
 def count_substring(string, sub_string):
-
     return sum(
         [
             1

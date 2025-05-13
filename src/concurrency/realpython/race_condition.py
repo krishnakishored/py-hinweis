@@ -10,11 +10,11 @@ class FakeDatabase:
         self._lock = threading.Lock()
 
     def update(self, name):
-        '''
-        It’s simulating reading a value from a database, 
-        doing some computation on it, 
+        """
+        It’s simulating reading a value from a database,
+        doing some computation on it,
         and then writing a new value back to the database.
-        '''
+        """
         logging.info("Thread %s: starting update", name)
         local_copy = self.value
         local_copy += 1
@@ -59,7 +59,7 @@ if __name__ == "__main__":
 # if __name__ == "__main__":
 #     import dis
 #     dis.dis(inc)
-#  
+#
 # The REPL example uses dis from the Python standard library
 # to show the smaller steps that the processor does to implement your function.
 #  25           0 LOAD_FAST                0 (x)

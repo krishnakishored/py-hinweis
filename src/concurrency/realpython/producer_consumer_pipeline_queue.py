@@ -46,16 +46,15 @@ class Pipeline(queue.Queue):
         logging.debug("%s:added %d to queue", name, value)
 
 
-'''
+"""
 If you want to be able to handle more than one value in the pipeline at a time, 
 you’ll need a data structure for the pipeline that allows the number to grow and shrink as data backs up from the producer.
-'''
+"""
 
 
 if __name__ == "__main__":
     format = "%(asctime)s: %(message)s"
-    logging.basicConfig(format=format, level=logging.INFO,
-                        datefmt="%H:%M:%S")
+    logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
     # logging.getLogger().setLevel(logging.DEBUG)
 
     pipeline = Pipeline()

@@ -1,32 +1,33 @@
-'''
+"""
 https://realpython.com/working-with-files-in-python/
 
 
 # https://realpython.com/read-write-files-python/#working-with-two-files-at-the-same-time
 
-'''
+"""
 
 import os
+
 ###############################################################################
 ## Traversing Directories and Processing Files
 
-os.walk() is used to generate filename in a directory tree by walking the tree either top-down or bottom-up. 
+"""os.walk() is used to generate filename in a directory tree by walking the tree either top-down or bottom-up. 
 
 os.walk() returns three values on each iteration of the loop:
 - The name of the current folder
 - A list of folders in the current folder
 - A list of files in the current folder
 
-
-for dirpath,dirnames,files in os.walk('my_directory'):
-    print(f'Found directory: {dirpath}')
+"""
+for dirpath, dirnames, files in os.walk("my_directory"):
+    print(f"Found directory: {dirpath}")
     for file_name in files:
         print(file_name)
 
 
-To traverse the directory tree in a bottom-up manner, pass in a topdown=False keyword argument to os.walk():
-for dirpath, dirnames, files in os.walk('my_directory', topdown=False):
-    print(f'Found directory: {dirpath}')
+"""To traverse the directory tree in a bottom-up manner, pass in a topdown=False keyword argument to os.walk():"""
+for dirpath, dirnames, files in os.walk("my_directory", topdown=False):
+    print(f"Found directory: {dirpath}")
     for file_name in files:
         print(file_name)
 
@@ -81,7 +82,7 @@ for dirpath, dirnames, files in os.walk('my_directory', topdown=False):
 ###############################################################################
 
 # Reading Multiple Files
-# Python supports reading data from multiple input streams or from a list of files through the fileinput module. This module allows you to loop over the contents of one or more text files quickly and easily. 
+# Python supports reading data from multiple input streams or from a list of files through the fileinput module. This module allows you to loop over the contents of one or more text files quickly and easily.
 import fileinput
 import sys
 
@@ -89,6 +90,6 @@ import sys
 files = fileinput.input()
 for line in files:
     if fileinput.isfirstline():
-        print(f'\n--- Reading {fileinput.filename()} ---')
-    print(' -> ' + line, end='')
+        print(f"\n--- Reading {fileinput.filename()} ---")
+    print(" -> " + line, end="")
 print()

@@ -1,24 +1,17 @@
 from graphs import Graph
 
-g = { "a" : ["d","f"],
-       "b" : ["c","b"],
-       "c" : ["b", "c", "d", "e"],
-       "d" : ["a", "c"],
-       "e" : ["c"],
-       "f" : ["a"]
+g = {
+    "a": ["d", "f"],
+    "b": ["c", "b"],
+    "c": ["b", "c", "d", "e"],
+    "d": ["a", "c"],
+    "e": ["c"],
+    "f": ["a"],
 }
 
-complete_graph = { 
-    "a" : ["b","c"],
-    "b" : ["a","c"],
-    "c" : ["a","b"]
-}
+complete_graph = {"a": ["b", "c"], "b": ["a", "c"], "c": ["a", "b"]}
 
-isolated_graph = { 
-    "a" : [],
-    "b" : [],
-    "c" : []
-}
+isolated_graph = {"a": [], "b": [], "c": []}
 
 
 graph = Graph(g)
@@ -31,31 +24,34 @@ graph = Graph(isolated_graph)
 print(graph.density())
 
 
-print('#############################################')
+print("#############################################")
 
 
-g = { "a" : ["d"],
-      "b" : ["c"],
-      "c" : ["b", "c", "d", "e"],
-      "d" : ["a", "c"],
-      "e" : ["c"],
-      "f" : []
+g = {
+    "a": ["d"],
+    "b": ["c"],
+    "c": ["b", "c", "d", "e"],
+    "d": ["a", "c"],
+    "e": ["c"],
+    "f": [],
 }
 
-g2 = { "a" : ["d","f"],
-       "b" : ["c"],
-       "c" : ["b", "c", "d", "e"],
-       "d" : ["a", "c"],
-       "e" : ["c"],
-       "f" : ["a"]
+g2 = {
+    "a": ["d", "f"],
+    "b": ["c"],
+    "c": ["b", "c", "d", "e"],
+    "d": ["a", "c"],
+    "e": ["c"],
+    "f": ["a"],
 }
 
-g3 = { "a" : ["d","f"],
-       "b" : ["c","b"],
-       "c" : ["b", "c", "d", "e"],
-       "d" : ["a", "c"],
-       "e" : ["c"],
-       "f" : ["a"]
+g3 = {
+    "a": ["d", "f"],
+    "b": ["c", "b"],
+    "c": ["b", "c", "d", "e"],
+    "d": ["a", "c"],
+    "e": ["c"],
+    "f": ["a"],
 }
 
 
@@ -71,6 +67,6 @@ graph = Graph(g3)
 print(graph)
 print(graph.is_connected())
 
-print('diameter: ',end='')
+print("diameter: ", end="")
 diameter = graph.diameter()
 print(diameter)

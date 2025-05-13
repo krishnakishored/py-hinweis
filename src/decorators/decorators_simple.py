@@ -4,7 +4,9 @@ def our_decorator(func):
         res = func(x)
         print(res)
         print("After calling " + func.__name__)
+
     return function_wrapper
+
 
 def foo(x):
     print("Hi, foo has been called with " + str(x))
@@ -14,9 +16,11 @@ def foo(x):
 def bar(x):
     return print("Hi I am a bar")
 
+
 @our_decorator
 def succ(n):
     return n + 1
+
 
 from math import sin, cos
 from random import random, randint, choice
@@ -28,14 +32,18 @@ def our_decorator_generalized(func):
         res = func(*args, **kwargs)
         print(res)
         print("After calling " + func.__name__)
+
     return function_wrapper
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     print("We call foo before decoration:")
     foo("Hi")
 
     print("We now decorate foo with f:")
-    foo = our_decorator(foo) #foo becomes a reference to the 'function_wrapper'.
+    foo = our_decorator(
+        foo
+    )  # foo becomes a reference to the 'function_wrapper'.
 
     print("We call foo after decoration:")
     foo(42)
@@ -46,8 +54,8 @@ if __name__=="__main__":
 
     sin = our_decorator(sin)
     cos = our_decorator(cos)
-    
-    for f in [sin,cos]:
+
+    for f in [sin, cos]:
         f(3.1415)
 
     random = our_decorator_generalized(random)
@@ -57,7 +65,6 @@ if __name__=="__main__":
     random()
     randint(3, 8)
     choice([4, 5, 6])
-
 
 
 # class A:
@@ -85,10 +92,6 @@ if __name__=="__main__":
 # #SimpleHi("Apple")
 
 
-
-
-
-
 # class decorator2:
 #     def __init__(self, f):
 #         self.f = f
@@ -113,4 +116,3 @@ if __name__=="__main__":
 #     print("inside foo() " + str(x))
 
 # #foo("Hello")
-

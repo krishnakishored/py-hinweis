@@ -5,6 +5,7 @@ import random
 import threading
 import time
 
+
 def producer(queue, event):
     """Pretend we're getting a number from the network."""
     while not event.is_set():
@@ -13,6 +14,7 @@ def producer(queue, event):
         queue.put(message)
 
     logging.info("Producer received event. Exiting")
+
 
 def consumer(queue, event):
     """Pretend we're saving a number in the database."""
@@ -24,10 +26,10 @@ def consumer(queue, event):
 
     logging.info("Consumer received event. Exiting")
 
+
 if __name__ == "__main__":
     format = "%(asctime)s: %(message)s"
-    logging.basicConfig(format=format, level=logging.INFO,
-                        datefmt="%H:%M:%S")
+    logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
 
     pipeline = queue.Queue(maxsize=10)
     event = threading.Event()

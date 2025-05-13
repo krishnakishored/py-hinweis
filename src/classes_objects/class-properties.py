@@ -1,8 +1,8 @@
 # https://www.python-course.eu/python3_properties.php
 
-class P:
 
-    def __init__(self,x):
+class P:
+    def __init__(self, x):
         self.x = x
 
     @property
@@ -20,8 +20,7 @@ class P:
 
 
 class Robot:
-
-    def __init__(self, name, build_year, lk = 0.5, lp = 0.5 ):
+    def __init__(self, name, build_year, lk=0.5, lp=0.5):
         self.name = name
         self.build_year = build_year
         self.__potential_physical = lk
@@ -31,21 +30,22 @@ class Robot:
     def condition(self):
         s = self.__potential_physical + self.__potential_psychic
         if s <= -1:
-           return "I feel miserable!"
+            return "I feel miserable!"
         elif s <= 0:
-           return "I feel bad!"
+            return "I feel bad!"
         elif s <= 0.5:
-           return "Could be worse!"
+            return "Could be worse!"
         elif s <= 1:
-           return "Seems to be okay!"
+            return "Seems to be okay!"
         else:
-           return "Great!" 
+            return "Great!"
+
 
 class OurClass:
-    '''
-     You can start with the simplest implementation imaginable, and you are free to later migrate to a property version without having to change the interface! 
-     So properties are not just a replacement for getters and setter! 
-    '''
+    """
+    You can start with the simplest implementation imaginable, and you are free to later migrate to a property version without having to change the interface!
+    So properties are not just a replacement for getters and setter!
+    """
 
     def __init__(self, a):
         self.OurAtt = a
@@ -64,20 +64,16 @@ class OurClass:
             self.__OurAtt = val
 
 
-
-
 if __name__ == "__main__":
-    p1 = P(1001) 
-    print(p1.x) #1000
+    p1 = P(1001)
+    print(p1.x)  # 1000
     p1.x = -12
-    print(p1.x) #0
+    print(p1.x)  # 0
 
-
-    x = Robot("Marvin", 1979, 0.2, 0.4 )
+    x = Robot("Marvin", 1979, 0.2, 0.4)
     y = Robot("Caliban", 1993, -0.4, 0.3)
     print(x.condition)
     print(y.condition)
 
-   
     x = OurClass(10)
     print(x.OurAtt)

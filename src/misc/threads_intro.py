@@ -1,9 +1,6 @@
+# thread.start_new_thread(function, args[, kwargs]) # starts a new thread and returns its identifier
+from _thread import start_new_thread, allocate_lock
 
-
-
-
-#thread.start_new_thread(function, args[, kwargs]) # starts a new thread and returns its identifier
-from _thread import start_new_thread,allocate_lock
 
 def heron(a):
     """Calculates the square root of a"""
@@ -11,11 +8,12 @@ def heron(a):
     old = 1
     new = 1
     while True:
-        old,new = new, (new + a/new) / 2.0
-        print (old, new)
+        old, new = new, (new + a / new) / 2.0
+        print(old, new)
         if abs(new - old) < eps:
             break
     return new
+
 
 # start_new_thread(heron,(99,))
 # start_new_thread(heron,(999,))
@@ -23,14 +21,16 @@ def heron(a):
 # #c = raw_input("Type something to quit.")#The raw_input() in the previous example is necessary, because otherwise all the threads would be exited, if the main program finishes.
 # c = input("Type something to quit.")
 
-#expanding with counters - might not work as expected
-'''
+# expanding with counters - might not work as expected
+"""
 The problem arises by the assignments to num_thread
 num_threads += 1 and num_threads -= 1
 These assignment statements are not atomic.
-'''
+"""
 
 num_threads = 0
+
+
 def heron_2(a):
     global num_threads
     num_threads += 1
@@ -40,13 +40,14 @@ def heron_2(a):
     old = 1
     new = 1
     while True:
-        old,new = new, (new + a/new) / 2.0
-        print (old, new)
+        old, new = new, (new + a / new) / 2.0
+        print(old, new)
         if abs(new - old) < eps:
             break
 
     num_threads -= 1
     return new
+
 
 # start_new_thread(heron_2,(99,))
 # start_new_thread(heron_2,(999,))
@@ -56,10 +57,12 @@ def heron_2(a):
 # while num_threads > 0:
 #     pass
 
-#using lock is the solution
+# using lock is the solution
 num_threads = 0
 thread_started = False
 lock = allocate_lock()
+
+
 def heron(a):
     global num_threads, thread_started
     lock.acquire()
@@ -71,8 +74,8 @@ def heron(a):
     old = 1
     new = 1
     while True:
-        old,new = new, (new + a/new) / 2.0
-        print (old, new)
+        old, new = new, (new + a / new) / 2.0
+        print(old, new)
         if abs(new - old) < eps:
             break
     lock.acquire()
@@ -80,9 +83,10 @@ def heron(a):
     lock.release()
     return new
 
-start_new_thread(heron,(99,))
-start_new_thread(heron,(999,))
-start_new_thread(heron,(1733,))
+
+start_new_thread(heron, (99,))
+start_new_thread(heron, (999,))
+start_new_thread(heron, (1733,))
 
 while not thread_started:
     pass
@@ -90,7 +94,7 @@ while num_threads > 0:
     pass
 
 
-'''
+"""
 
 Threading :-
 --------------
@@ -133,4 +137,4 @@ Threading :-
 14) How to terminate a blocking thread?
 15) Can we start a thread twice ??
 
-'''
+"""

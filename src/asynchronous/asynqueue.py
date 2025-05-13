@@ -7,14 +7,17 @@ import os
 import random
 import time
 
+
 async def makeitem(size: int = 5) -> str:
     return os.urandom(size).hex()
+
 
 async def randsleep(a: int = 1, b: int = 5, caller=None) -> None:
     i = random.randint(0, 10)
     if caller:
         print(f"{caller} sleeping for {i} seconds.")
     await asyncio.sleep(i)
+
 
 async def produce(name: int, q: asyncio.Queue) -> None:
     n = random.randint(0, 10)
@@ -25,14 +28,15 @@ async def produce(name: int, q: asyncio.Queue) -> None:
         await q.put((i, t))
         print(f"Producer {name} added <{i}> to queue.")
 
+
 async def consume(name: int, q: asyncio.Queue) -> None:
     while True:
         await randsleep(caller=f"Consumer {name}")
         i, t = await q.get()
         now = time.perf_counter()
-        print(f"Consumer {name} got element <{i}>"
-              f" in {now-t:0.5f} seconds.")
+        print(f"Consumer {name} got element <{i}> in {now - t:0.5f} seconds.")
         q.task_done()
+
 
 async def main(nprod: int, ncon: int):
     q = asyncio.Queue()
@@ -43,8 +47,10 @@ async def main(nprod: int, ncon: int):
     for c in consumers:
         c.cancel()
 
+
 if __name__ == "__main__":
     import argparse
+
     random.seed(444)
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--nprod", type=int, default=5)
