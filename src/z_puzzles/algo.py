@@ -1,24 +1,3 @@
-"""
-3,5 - fizzBuzz
-only 3 - Fizz
-only 5 - Buzz
-none of 3, 5 - i
-"""
-
-
-def fizzBuzz(n):
-    for i in range(1, n + 1):
-        result = ""  #
-        if i % 3 == 0:
-            result = result + "Fizz"
-        if i % 5 == 0:
-            result = result + "Buzz"
-
-        if not result:
-            result = i
-        print(result)
-
-
 def slope(x1, y1, x2, y2):
     return (y2 - y1) / (x2 - x1)
 
